@@ -1,0 +1,14 @@
+gradio
+openai
+pandas
+openpyxl
+python-docx
+rank-bm25
+langchain
+langchain-community
+langchain-openai
+sentence-transformers
+chromadb
+tiktoken
+pytesseract
+pdf2image
