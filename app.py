@@ -67,10 +67,13 @@ if st.sidebar.button("Process Documents"):
 
                 all_docs.extend(docs)
                 filenames.append(file.name)
+            try:
+                retriever, n_chunks = build_index(all_docs, api_key)
 
-            retriever, n_chunks = build_index(all_docs, api_key)
-
-            summary = generate_summary(all_docs, filenames, client)
+                if n_chunks < 5:
+                    st.warning("⚠️ Document had limited readable text. Using fallback processing.")
+                
+                summary = generate_summary(all_docs, filenames, client)
 
             st.session_state.retriever = retriever
             st.session_state.client = client
