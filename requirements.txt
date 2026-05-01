@@ -3,9 +3,10 @@ openai
 langchain
 langchain-openai
 langchain-community
+langchain-experimental
 sentence-transformers
 rank-bm25
 chromadb
 pandas
 openpyxl
-docx
+python-docx
