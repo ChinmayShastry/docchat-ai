@@ -1,9 +1,3 @@
-# ─────────────────────────────────────────────────────────────────────────────
-# INDEX BUILDER
-# Embeds all chunks into ChromaDB and wires up the HybridRetriever.
-# Called once per document upload session.
-# ─────────────────────────────────────────────────────────────────────────────
-
 import uuid
 import tempfile
 
@@ -14,7 +8,11 @@ from src.chunking import create_chunks
 from src.retriever import HybridRetriever
 from config import Config
 
+
 def build_index(all_docs, api_key):
+
+    print(f"Total docs: {len(all_docs)}")
+
     embedding_model = OpenAIEmbeddings(
         model=Config.EMBEDDING_MODEL,
         openai_api_key=api_key
@@ -24,19 +22,31 @@ def build_index(all_docs, api_key):
     total_chars = sum(len(doc.page_content) for doc in all_docs)
     print(f"📄 Pages: {total_pages} | Characters: {total_chars:,}")
 
+    # ── Chunking ─────────────────────────
     all_chunks = create_chunks(all_docs, embedding_model)
 
-    # Drop near-empty chunks that would add noise to retrieval
-    all_chunks = [c for c in all_chunks if len(c.page_content.strip()) > 50]
+    print(f"Total chunks before filter: {len(all_chunks)}")
 
-    # Assign a unique ID to each chunk (useful for dedup / future caching)
+    # Filter small chunks
+    all_chunks = [
+        c for c in all_chunks if len(c.page_content.strip()) > 10
+    ]
+
+    print(f"Total chunks after filter: {len(all_chunks)}")
+
+    # ❌ Safety check
+    if not all_chunks:
+        raise ValueError("No valid chunks created from documents.")
+
+    # Add metadata
     for chunk in all_chunks:
         chunk.metadata["chunk_id"] = str(uuid.uuid4())
 
-    print(f"✅ Chunks created: {len(all_chunks)}")
+    print(f"✅ Final chunks stored: {len(all_chunks)}")
 
-    # Use a temp directory so each session gets an isolated vector store
+    # ── Vector DB ─────────────────────────
     persist_dir = tempfile.mkdtemp()
+
     vectorstore = Chroma.from_documents(
         documents=all_chunks,
         embedding=embedding_model,
@@ -50,4 +60,3 @@ def build_index(all_docs, api_key):
     )
 
     return retriever, len(all_chunks)
-
