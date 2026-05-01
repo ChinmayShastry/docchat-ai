@@ -1,27 +1,29 @@
-# ─────────────────────────────────────────────────────────────────────────────
-# CHUNKING
-
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 try:
     from langchain_experimental.text_splitter import SemanticChunker
     SEMANTIC_AVAILABLE = True
 except ImportError:
-    SEMANTIC_AVAILABLE = Falsefrom config import Config
+    SEMANTIC_AVAILABLE = False
+
+from config import Config
+
+
 def create_chunks(all_docs, embedding_model):
     total_chars = sum(len(doc.page_content) for doc in all_docs)
 
-    if total_chars < Config.SMALL_DOC_THRESHOLD:
+    # ✅ Use semantic only if available
+    if total_chars < Config.SMALL_DOC_THRESHOLD and SEMANTIC_AVAILABLE:
         print("🔬 Small document — using Semantic Chunking")
+
         semantic_splitter = SemanticChunker(
             embeddings=embedding_model,
             breakpoint_threshold_type="percentile",
             breakpoint_threshold_amount=85
         )
 
-        # FIX: pass all documents in a single batched call instead of
-        # looping (avoids N separate embedding API round-trips)
-        texts     = [doc.page_content for doc in all_docs]
-        metadatas = [doc.metadata     for doc in all_docs]
+        texts = [doc.page_content for doc in all_docs]
+        metadatas = [doc.metadata for doc in all_docs]
 
         try:
             chunks = semantic_splitter.create_documents(
@@ -29,22 +31,24 @@ def create_chunks(all_docs, embedding_model):
                 metadatas=metadatas
             )
         except Exception as e:
-            print(f"[SemanticChunker failed, falling back to fixed] {e}")
-            chunks = all_docs   # fall through to fixed chunking below
+            print(f"[SemanticChunker failed → fallback] {e}")
+            chunks = all_docs
 
     else:
-        print("⚡ Large document — using Fixed Chunking (faster)")
+        print("⚡ Using Fixed Chunking")
+
         splitter = RecursiveCharacterTextSplitter(
             chunk_size=Config.CHUNK_SIZE,
             chunk_overlap=Config.CHUNK_OVERLAP,
             separators=["\n\n", "\n", ".", " "]
         )
+
         chunks = splitter.split_documents(all_docs)
 
-    # Safety net: if chunking produced too few pieces, re-chunk with fixed splitter
+    # Safety fallback
     if len(chunks) < 3:
-        print("⚠️ Too few chunks produced — re-chunking with fixed splitter")
+        print("⚠️ Re-chunking fallback triggered")
         splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-        chunks   = splitter.split_documents(all_docs)
+        chunks = splitter.split_documents(all_docs)
 
     return chunks
