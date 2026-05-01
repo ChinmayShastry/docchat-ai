@@ -4,13 +4,12 @@ from config import Config
 
 def normalize_history(history):
     """Return history as clean (user, assistant) string tuples."""
-    
-    print("Normalized history:", normalized[:2])
 
     if not history:
         return []
 
     normalized = []
+    print("Normalized history:", normalized[:2])
 
     def safe_str(x):
         """Convert any type → safe string."""
