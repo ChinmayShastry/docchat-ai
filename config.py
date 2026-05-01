@@ -27,3 +27,5 @@ class Config:
 
     # Hard cap on context characters sent to the LLM to avoid token overflow
     MAX_CONTEXT_CHARS = 12_000 
+
+    SEMANTIC_THRESHOLD = 0.2
