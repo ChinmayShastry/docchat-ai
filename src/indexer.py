@@ -34,14 +34,23 @@ def build_index(all_docs, api_key):
 
     print(f"Total chunks after filter: {len(all_chunks)}")
 
-    # ❌ Safety check
+    # Safety check
     if not all_chunks:
-        raise ValueError("No valid chunks created from documents.")
+    print("⚠️ No chunks after filtering → using raw documents")
 
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=500,
+        chunk_overlap=100
+    )
+    all_chunks = splitter.split_documents(all_docs)
+    
     # Add metadata
     for chunk in all_chunks:
         chunk.metadata["chunk_id"] = str(uuid.uuid4())
-
+        
+    print("Chunks after filter:", len(all_chunks))
     print(f"✅ Final chunks stored: {len(all_chunks)}")
 
     # ── Vector DB ─────────────────────────
