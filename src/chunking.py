@@ -12,7 +12,7 @@ from config import Config
 def create_chunks(all_docs, embedding_model):
     total_chars = sum(len(doc.page_content) for doc in all_docs)
 
-    # ✅ Use semantic only if available
+    # ── Semantic Chunking ─────────────────────────
     if total_chars < Config.SMALL_DOC_THRESHOLD and SEMANTIC_AVAILABLE:
         print("🔬 Small document — using Semantic Chunking")
 
@@ -32,8 +32,14 @@ def create_chunks(all_docs, embedding_model):
             )
         except Exception as e:
             print(f"[SemanticChunker failed → fallback] {e}")
-            chunks = all_docs
 
+            splitter = RecursiveCharacterTextSplitter(
+                chunk_size=500,
+                chunk_overlap=100
+            )
+            chunks = splitter.split_documents(all_docs)
+
+    # ── Fixed Chunking ────────────────────────────
     else:
         print("⚡ Using Fixed Chunking")
 
@@ -45,10 +51,14 @@ def create_chunks(all_docs, embedding_model):
 
         chunks = splitter.split_documents(all_docs)
 
-    # Safety fallback
+    # ── Safety fallback ───────────────────────────
     if len(chunks) < 3:
         print("⚠️ Re-chunking fallback triggered")
-        splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=500,
+            chunk_overlap=100
+        )
         chunks = splitter.split_documents(all_docs)
 
     return chunks
