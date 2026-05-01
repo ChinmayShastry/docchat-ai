@@ -56,8 +56,12 @@ if st.sidebar.button("Process Documents"):
 
             for file in files:
                 filepath = f"temp_{file.name}"
-                with open(filepath, "wb") as f:
-                    f.write(file.getbuffer())
+
+                import tempfile
+
+                with tempfile.NamedTemporaryFile(delete=False, suffix=file.name) as tmp:
+                    tmp.write(file.getbuffer())
+                    filepath = tmp.name
 
                 docs = extract_text(filepath, file.name)
 
