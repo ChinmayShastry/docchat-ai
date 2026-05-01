@@ -1,50 +1,55 @@
 # HISTORY NORMALIZER
-# Gradio changed its chat history format across major versions:
-#
-#   Gradio ≤ 3.x / tuples mode  →  [[user_str, assistant_str], ...]
-#   Gradio 4.x  / messages mode →  [{"role": "user",      "content": "..."},
-#                                    {"role": "assistant", "content": "..."}, ...]
-#
-# The rest of the code expects plain (user, assistant) string tuples.
-# This function normalises both formats and silently drops any incomplete
-# turns (assistant = None) that Gradio can produce mid-stream.
 
 from config import Config
 
 def normalize_history(history):
-    """Return history as a list of (user_text, assistant_text) string tuples."""
+    """Return history as clean (user, assistant) string tuples."""
+    
+    print("Normalized history:", normalized[:2])
+
     if not history:
         return []
 
     normalized = []
 
-    # ── Detect format ─────────────────────────────────────────────────────
-    if history and isinstance(history[0], dict):
-        # Messages format: flat list of role/content dicts.
-        # Walk through pairs: user message followed immediately by assistant message.
+    def safe_str(x):
+        """Convert any type → safe string."""
+        if x is None:
+            return ""
+        if isinstance(x, list):
+            return " ".join(map(str, x))
+        if isinstance(x, dict):
+            return str(x.get("content", ""))
+        return str(x)
+
+    # ── Detect format ─────────────────────────────────────────────
+    if isinstance(history[0], dict):
         i = 0
         while i < len(history) - 1:
             user_entry = history[i]
             asst_entry = history[i + 1]
-            if (user_entry.get("role") == "user" and
-                    asst_entry.get("role") == "assistant"):
-                user_text = user_entry.get("content") or ""
-                asst_text = asst_entry.get("content") or ""
-                # Skip turns where the assistant reply hasn't arrived yet (None/empty)
+
+            if user_entry.get("role") == "user" and asst_entry.get("role") == "assistant":
+
+                user_text = safe_str(user_entry.get("content"))
+                asst_text = safe_str(asst_entry.get("content"))
+
                 if user_text.strip() and asst_text.strip():
-                    normalized.append((str(user_text), str(asst_text)))
+                    normalized.append((user_text, asst_text))
+
                 i += 2
             else:
-                i += 1  # skip malformed entries
+                i += 1
+
     else:
-        # Tuples / lists format: each item is [user_str, assistant_str].
+        # tuple/list format
         for turn in history:
-            if (len(turn) >= 2
-                    and turn[0] is not None
-                    and turn[1] is not None
-                    and str(turn[0]).strip()
-                    and str(turn[1]).strip()):
-                normalized.append((str(turn[0]), str(turn[1])))
+            if len(turn) >= 2:
+                user_text = safe_str(turn[0])
+                asst_text = safe_str(turn[1])
+
+                if user_text.strip() and asst_text.strip():
+                    normalized.append((user_text, asst_text))
 
     return normalized
 
