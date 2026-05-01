@@ -50,41 +50,36 @@ if st.sidebar.button("Process Documents"):
     else:
         try:
             client = OpenAI(api_key=api_key)
-
+        
             all_docs = []
             filenames = []
-
+        
             for file in files:
-                filepath = f"temp_{file.name}"
-
                 import tempfile
-
                 with tempfile.NamedTemporaryFile(delete=False, suffix=file.name) as tmp:
                     tmp.write(file.getbuffer())
                     filepath = tmp.name
-
+        
                 docs = extract_text(filepath, file.name)
-
                 all_docs.extend(docs)
                 filenames.append(file.name)
-            try:
-                retriever, n_chunks = build_index(all_docs, api_key)
-
-                if n_chunks < 5:
-                    st.warning("⚠️ Document had limited readable text. Using fallback processing.")
-                
-                summary = generate_summary(all_docs, filenames, client)
-
+        
+            retriever, n_chunks = build_index(all_docs, api_key)
+        
+            if n_chunks < 5:
+                st.warning("⚠️ Document had limited readable text. Using fallback processing.")
+        
+            summary = generate_summary(all_docs, filenames, client)
+        
             st.session_state.retriever = retriever
             st.session_state.client = client
             st.session_state.messages = []
-
+        
             st.success("Documents processed!")
             st.write(summary)
-
+        
         except Exception as e:
             st.error(str(e))
-
 
 # -----------------------------
 # CHAT SECTION
