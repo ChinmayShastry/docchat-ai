@@ -106,13 +106,24 @@ if prompt := st.chat_input("Ask about your document..."):
 
             full_response = ""
 
-            history = [
-                (m["content"], "")
-                if m["role"] == "user"
-                else ("", m["content"])
-                for m in st.session_state.messages
-            ]
+            def build_history(messages):
+                history = []
+                i = 0
 
+                while i < len(messages) - 1:
+                    if messages[i]["role"] == "user" and messages[i+1]["role"] == "assistant":
+                        history.append((
+                            messages[i]["content"],
+                            messages[i+1]["content"]
+                        ))
+                        i += 2
+                    else:
+                        i += 1
+            
+                return history
+                
+            history = build_history(st.session_state.messages)
+            
             for chunk in ask_document_stream(
                 prompt,
                 history,
