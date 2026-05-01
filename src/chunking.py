@@ -1,18 +1,12 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # CHUNKING
-# Decides between semantic chunking (small docs) and fixed chunking (large docs).
-#
-# Semantic chunking:  uses embedding similarity to find natural topic boundaries.
-#                     Better quality but makes extra API calls — only viable for
-#                     small documents where the cost is acceptable.
-#
-# Fixed chunking:     splits by character count with overlap. Fast and cheap,
-#                     suitable for large documents.
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_experimental.text_splitter import SemanticChunker
-from config import Config
-
+try:
+    from langchain_experimental.text_splitter import SemanticChunker
+    SEMANTIC_AVAILABLE = True
+except ImportError:
+    SEMANTIC_AVAILABLE = Falsefrom config import Config
 def create_chunks(all_docs, embedding_model):
     total_chars = sum(len(doc.page_content) for doc in all_docs)
 
