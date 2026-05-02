@@ -63,6 +63,9 @@ if st.sidebar.button("Process Documents"):
                 docs = extract_text(filepath, file.name)
                 all_docs.extend(docs)
                 filenames.append(file.name)
+
+            print("DEBUG: total docs extracted:", len(all_docs))
+            st.write("DEBUG: total docs extracted:", len(all_docs))
         
             retriever, n_chunks = build_index(all_docs, api_key)
         
