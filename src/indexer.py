@@ -1,122 +1,87 @@
-from langchain_core.documents import Document
-import docx
-import openpyxl
-import pandas as pd
+import uuid
+import tempfile
+
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from src.chunking import create_chunks
+from src.retriever import HybridRetriever
+from config import Config
 
 
-def extract_text(filepath, filename):
-    ext = filename.split(".")[-1].lower()
-    docs = []
+def build_index(all_docs, api_key):
 
-    # ── PDF ─────────────────────────────────────────
-    if ext == "pdf":
-        try:
-            from langchain_community.document_loaders import PyPDFLoader
+    print(f"Total docs: {len(all_docs)}")
 
-            loader = PyPDFLoader(filepath)
-            pages = loader.load()
+    embedding_model = OpenAIEmbeddings(
+        model=Config.EMBEDDING_MODEL,
+        openai_api_key=api_key
+    )
 
-            # Remove empty pages
-            pages = [
-                p for p in pages
-                if p.page_content and p.page_content.strip()
-            ]
+    total_pages = len(all_docs)
+    total_chars = sum(len(doc.page_content) for doc in all_docs)
+    print(f"📄 Pages: {total_pages} | Characters: {total_chars:,}")
 
-            if pages:
-                for p in pages:
-                    p.metadata["source"] = filename
-                    p.metadata["doc_name"] = filename
-                return pages
+    # ── Chunking ─────────────────────────
+    all_chunks = create_chunks(all_docs, embedding_model)
 
-        except Exception as e:
-            print(f"[PDF native extraction failed] {e}")
+    print(f"Total chunks before filter: {len(all_chunks)}")
 
-        # OCR fallback
-        try:
-            import pytesseract
-            from pdf2image import convert_from_path
+    # ── Clean chunks ─────────────────────
+    all_chunks = [
+        c for c in all_chunks
+        if c.page_content and len(c.page_content.strip()) > 5
+    ]
 
-            images = convert_from_path(filepath, dpi=200)
+    print(f"Clean chunks after filter: {len(all_chunks)}")
 
-            for i, image in enumerate(images):
-                text = pytesseract.image_to_string(image)
+    # ── Fallback if empty ─────────────────
+    if not all_chunks:
+        print("⚠️ No valid chunks → applying fallback chunking")
 
-                if text and text.strip():
-                    docs.append(Document(
-                        page_content=text,
-                        metadata={
-                            "source": filename,
-                            "page": i + 1,
-                            "doc_name": filename
-                        }
-                    ))
-
-        except Exception as e:
-            print(f"[PDF OCR fallback failed] {e}")
-
-    # ── DOCX ────────────────────────────────────────
-    elif ext == "docx":
-        doc = docx.Document(filepath)
-        text = "\n".join([p.text for p in doc.paragraphs if p.text.strip()])
-
-        if text.strip():
-            docs.append(Document(
-                page_content=text,
-                metadata={"source": filename, "page": 1, "doc_name": filename}
-            ))
-
-    # ── TXT ─────────────────────────────────────────
-    elif ext == "txt":
-        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-            text = f.read()
-
-        if text.strip():
-            docs.append(Document(
-                page_content=text,
-                metadata={"source": filename, "page": 1, "doc_name": filename}
-            ))
-
-    # ── Excel ───────────────────────────────────────
-    elif ext in ["xlsx", "xls"]:
-        wb = openpyxl.load_workbook(filepath, data_only=True)
-        text = ""
-
-        for sheet in wb.sheetnames:
-            ws = wb[sheet]
-            text += f"\n[Sheet: {sheet}]\n"
-
-            for row in ws.iter_rows(values_only=True):
-                row_text = " | ".join([str(c) for c in row if c is not None])
-                if row_text.strip():
-                    text += row_text + "\n"
-
-        if text.strip():
-            docs.append(Document(
-                page_content=text,
-                metadata={"source": filename, "page": 1, "doc_name": filename}
-            ))
-
-    # ── CSV ─────────────────────────────────────────
-    elif ext == "csv":
-        try:
-            df = pd.read_csv(filepath, on_bad_lines="skip")
-        except Exception as e:
-            print(f"[CSV read error] {e}")
-            return docs
-
-        text = (
-            f"Dataset: {filename}\n"
-            f"Rows: {len(df)}\n"
-            f"Columns: {', '.join(df.columns.tolist())}\n\n"
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=500,
+            chunk_overlap=100
         )
+        all_chunks = splitter.split_documents(all_docs)
 
-        sample_df = df.sample(min(len(df), 100), random_state=42)
-        text += sample_df.to_string()
+        # 🔥 Clean again after fallback
+        all_chunks = [
+            c for c in all_chunks
+            if c.page_content and len(c.page_content.strip()) > 5
+        ]
 
-        if text.strip():
-            docs.append(Document(
-                page_content=text,
-                metadata={"source": filename, "page": 1, "doc_name": filename}
-            ))
+        print(f"Chunks after fallback: {len(all_chunks)}")
 
-    return docs
+        if not all_chunks:
+            raise ValueError(
+                "❌ No usable text found. Document may be scanned or empty."
+            )
+
+    # ── Add metadata ─────────────────────
+    for chunk in all_chunks:
+        chunk.metadata["chunk_id"] = str(uuid.uuid4())
+
+    print(f"✅ Final chunks stored: {len(all_chunks)}")
+
+    # Debug preview (optional but useful)
+    for i, c in enumerate(all_chunks[:2]):
+        print(f"Chunk {i} preview:", c.page_content[:100])
+
+    # ── Vector DB ─────────────────────────
+    persist_dir = tempfile.mkdtemp()
+
+    vectorstore = Chroma.from_documents(
+        documents=all_chunks,
+        embedding=embedding_model,
+        persist_directory=persist_dir
+    )
+
+    retriever = HybridRetriever(
+        chunks=all_chunks,
+        vectorstore=vectorstore,
+        alpha=Config.HYBRID_ALPHA
+    )
+
+    return retriever, len(all_chunks)
