@@ -1,3 +1,61 @@
+# ── PDF ─────────────────────────────────────────
+    # if ext == "pdf":
+    # docs = []
+    # print("DEBUG: Starting PDF extraction")
+    
+    # # Try PyPDFLoader first
+    # try:
+    #     from langchain_community.document_loaders import PyPDFLoader
+
+    #     loader = PyPDFLoader(filepath)
+    #     pages = loader.load()
+
+    #     pages = [
+    #         p for p in pages
+    #         if p.page_content and p.page_content.strip()
+    #     ]
+
+    #     if pages:
+    #         for p in pages:
+    #             p.metadata["source"] = filename
+    #             p.metadata["doc_name"] = filename
+
+    #         print("✅ PDF parsed using PyPDFLoader")
+    #         return pages
+
+    # except Exception as e:
+    #     print(f"[PyPDFLoader failed] {e}")
+    #     print("DEBUG: PyPDFLoader pages:", len(pages))
+
+    # # 🔥 Fallback: PyMuPDF (VERY IMPORTANT)
+    # try:
+    #     import fitz  # PyMuPDF
+
+    #     doc = fitz.open(filepath)
+
+    #     for i, page in enumerate(doc):
+    #         text = page.get_text()
+
+    #         if text and text.strip():
+    #             docs.append(Document(
+    #                 page_content=text,
+    #                 metadata={
+    #                     "source": filename,
+    #                     "page": i + 1,
+    #                     "doc_name": filename
+    #                 }
+    #             ))
+
+    #     if docs:
+    #         print("✅ PDF parsed using PyMuPDF")
+    #         return docs
+
+    # except Exception as e:
+    #     print(f"[PyMuPDF failed] {e}")
+    #     print("DEBUG: PyMuPDF docs:", len(docs))
+
+
+
 from langchain_core.documents import Document
 import docx
 import openpyxl
@@ -10,58 +68,62 @@ def extract_text(filepath, filename):
 
     # ── PDF ─────────────────────────────────────────
     if ext == "pdf":
-    docs = []
+        print("DEBUG: Starting PDF extraction")
 
-    # Try PyPDFLoader first
-    try:
-        from langchain_community.document_loaders import PyPDFLoader
+        # ── Try PyPDFLoader ─────────────────────────
+        try:
+            from langchain_community.document_loaders import PyPDFLoader
 
-        loader = PyPDFLoader(filepath)
-        pages = loader.load()
+            loader = PyPDFLoader(filepath)
+            pages = loader.load()
 
-        pages = [
-            p for p in pages
-            if p.page_content and p.page_content.strip()
-        ]
+            pages = [
+                p for p in pages
+                if p.page_content and p.page_content.strip()
+            ]
 
-        if pages:
-            for p in pages:
-                p.metadata["source"] = filename
-                p.metadata["doc_name"] = filename
+            print(f"DEBUG: PyPDFLoader pages after filter: {len(pages)}")
 
-            print("✅ PDF parsed using PyPDFLoader")
-            return pages
+            if pages:
+                for p in pages:
+                    p.metadata["source"] = filename
+                    p.metadata["doc_name"] = filename
 
-    except Exception as e:
-        print(f"[PyPDFLoader failed] {e}")
+                print("✅ PDF parsed using PyPDFLoader")
+                return pages
 
-    # 🔥 Fallback: PyMuPDF (VERY IMPORTANT)
-    try:
-        import fitz  # PyMuPDF
+        except Exception as e:
+            print(f"[PyPDFLoader failed] {e}")
 
-        doc = fitz.open(filepath)
+        # ── Fallback: PyMuPDF ─────────────────────────
+        try:
+            import fitz  # PyMuPDF
 
-        for i, page in enumerate(doc):
-            text = page.get_text()
+            doc = fitz.open(filepath)
 
-            if text and text.strip():
-                docs.append(Document(
-                    page_content=text,
-                    metadata={
-                        "source": filename,
-                        "page": i + 1,
-                        "doc_name": filename
-                    }
-                ))
+            for i, page in enumerate(doc):
+                text = page.get_text()
 
-        if docs:
-            print("✅ PDF parsed using PyMuPDF")
-            return docs
+                if text and text.strip():
+                    docs.append(Document(
+                        page_content=text,
+                        metadata={
+                            "source": filename,
+                            "page": i + 1,
+                            "doc_name": filename
+                        }
+                    ))
 
-    except Exception as e:
-        print(f"[PyMuPDF failed] {e}")
-        
-        # OCR fallback
+            print(f"DEBUG: PyMuPDF docs after filter: {len(docs)}")
+
+            if docs:
+                print("✅ PDF parsed using PyMuPDF")
+                return docs
+
+        except Exception as e:
+            print(f"[PyMuPDF failed] {e}")
+
+        # ── OCR fallback ─────────────────────────
         try:
             import pytesseract
             from pdf2image import convert_from_path
@@ -89,7 +151,7 @@ def extract_text(filepath, filename):
         doc = docx.Document(filepath)
         text = "\n".join([p.text for p in doc.paragraphs if p.text.strip()])
 
-        if text.strip():
+        if text and text.strip():
             docs.append(Document(
                 page_content=text,
                 metadata={"source": filename, "page": 1, "doc_name": filename}
@@ -100,7 +162,7 @@ def extract_text(filepath, filename):
         with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
             text = f.read()
 
-        if text.strip():
+        if text and text.strip():
             docs.append(Document(
                 page_content=text,
                 metadata={"source": filename, "page": 1, "doc_name": filename}
@@ -120,7 +182,7 @@ def extract_text(filepath, filename):
                 if row_text.strip():
                     text += row_text + "\n"
 
-        if text.strip():
+        if text and text.strip():
             docs.append(Document(
                 page_content=text,
                 metadata={"source": filename, "page": 1, "doc_name": filename}
@@ -143,7 +205,7 @@ def extract_text(filepath, filename):
         sample_df = df.sample(min(len(df), 100), random_state=42)
         text += sample_df.to_string()
 
-        if text.strip():
+        if text and text.strip():
             docs.append(Document(
                 page_content=text,
                 metadata={"source": filename, "page": 1, "doc_name": filename}
