@@ -10,27 +10,57 @@ def extract_text(filepath, filename):
 
     # ── PDF ─────────────────────────────────────────
     if ext == "pdf":
-        try:
-            from langchain_community.document_loaders import PyPDFLoader
+    docs = []
 
-            loader = PyPDFLoader(filepath)
-            pages = loader.load()
+    # Try PyPDFLoader first
+    try:
+        from langchain_community.document_loaders import PyPDFLoader
 
-            # Remove empty pages
-            pages = [
-                p for p in pages
-                if p.page_content and p.page_content.strip()
-            ]
+        loader = PyPDFLoader(filepath)
+        pages = loader.load()
 
-            if pages:
-                for p in pages:
-                    p.metadata["source"] = filename
-                    p.metadata["doc_name"] = filename
-                return pages
+        pages = [
+            p for p in pages
+            if p.page_content and p.page_content.strip()
+        ]
 
-        except Exception as e:
-            print(f"[PDF native extraction failed] {e}")
+        if pages:
+            for p in pages:
+                p.metadata["source"] = filename
+                p.metadata["doc_name"] = filename
 
+            print("✅ PDF parsed using PyPDFLoader")
+            return pages
+
+    except Exception as e:
+        print(f"[PyPDFLoader failed] {e}")
+
+    # 🔥 Fallback: PyMuPDF (VERY IMPORTANT)
+    try:
+        import fitz  # PyMuPDF
+
+        doc = fitz.open(filepath)
+
+        for i, page in enumerate(doc):
+            text = page.get_text()
+
+            if text and text.strip():
+                docs.append(Document(
+                    page_content=text,
+                    metadata={
+                        "source": filename,
+                        "page": i + 1,
+                        "doc_name": filename
+                    }
+                ))
+
+        if docs:
+            print("✅ PDF parsed using PyMuPDF")
+            return docs
+
+    except Exception as e:
+        print(f"[PyMuPDF failed] {e}")
+        
         # OCR fallback
         try:
             import pytesseract
