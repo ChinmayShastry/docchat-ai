@@ -50,6 +50,7 @@ def normalize_history(history):
                 if user_text.strip() and asst_text.strip():
                     normalized.append((user_text, asst_text))
 
+    print("Normalized history:", normalized[:2])
     return normalized
 
 
