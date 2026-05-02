@@ -56,7 +56,7 @@ if st.sidebar.button("Process Documents"):
         
             for file in files:
                 import tempfile
-                with tempfile.NamedTemporaryFile(delete=False, suffix=file.name) as tmp:
+                with tempfile.NamedTemporaryFile(delete=False, suffix="." + file.name.split(".")[-1]) as tmp:
                     tmp.write(file.getbuffer())
                     filepath = tmp.name
         
