@@ -28,22 +28,16 @@ def build_index(all_docs, api_key):
 
     print(f"Total chunks before filter: {len(all_chunks)}")
 
-    # Filter small chunks
+    # 🔥 FINAL CLEANING (CRITICAL FIX)
     all_chunks = [
-        c for c in all_chunks if len(c.page_content.strip()) > 10
+        c for c in all_chunks
+        if c.page_content and len(c.page_content.strip()) > 5
     ]
 
-    print(f"Total chunks after filter: {len(all_chunks)}")
+    print(f"Clean chunks after final filter: {len(all_chunks)}")
 
-    # ── Fallback if empty ─────────────────
     if not all_chunks:
-        print("⚠️ No chunks after filtering → using fallback chunking")
-
-        splitter = RecursiveCharacterTextSplitter(
-            chunk_size=500,
-            chunk_overlap=100
-        )
-        all_chunks = splitter.split_documents(all_docs)
+        raise ValueError("❌ No usable text found. Document may be scanned or empty.")
 
     # Add metadata
     for chunk in all_chunks:
