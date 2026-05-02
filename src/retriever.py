@@ -52,11 +52,11 @@ class HybridRetriever:
         # ── Filtering ───────────────────────────
         filtered = [
             c for c in candidate_chunks
-            if sem_score_map.get(id(c), 0) > Config.SEMANTIC_THRESHOLD
+            if sem_score_map.get(id(c), 0) > Config.SEMANTIC_THRESHOLD    
         ]
 
         # Fallback if too aggressive
-        if len(filtered) < 10:
+        if len(filtered) < 5:
             filtered = candidate_chunks[:20]
 
         candidate_chunks = filtered[:40]
