@@ -153,4 +153,8 @@ def extract_text(filepath, filename):
                 metadata={"source": filename, "page": 1, "doc_name": filename}
             ))
 
+    # ── DEBUG for future use
+    if not docs:
+        print("⚠️ No text extracted from:", filename)
+        
     return docs
