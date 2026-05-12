@@ -27,7 +27,7 @@ def build_index(all_docs, api_key):
     all_chunks = create_chunks(all_docs, embedding_model)    
 
     if len(all_chunks) < 3:
-    print("⚠️ Very low chunk count — results may be weak")
+        print("⚠️ Very low chunk count — results may be weak")
     
     print(f"Total chunks before filter: {len(all_chunks)}")
 
