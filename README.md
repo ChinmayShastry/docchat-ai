@@ -136,10 +136,10 @@ pytest
 ruff check .
 ```
 
-64 tests, fully mocked — no API calls, no model downloads, so CI runs free on every push.
+68 tests, fully mocked — no API calls, no model downloads, so CI runs free on every push.
 Coverage focuses on the logic most likely to break silently: score blending and candidate
-filtering, chunking fallbacks, per-format extraction, history normalisation, and the
-groundedness verdict parser.
+filtering, the PDF parser fallback chain, chunking fallbacks, per-format extraction,
+history normalisation, and the groundedness verdict parser.
 
 ---
 
@@ -195,7 +195,7 @@ docchat-ai/
 │   ├── summarizer.py         Direct and Map-Reduce summarisation
 │   ├── chat.py               Context assembly, streaming, groundedness check
 │   └── logging_setup.py      Central logging config
-├── tests/                    64 mocked unit tests
+├── tests/                    68 mocked unit tests
 ├── eval/
 │   ├── corpus/               Synthetic evaluation document
 │   ├── dataset.json          26 questions with ground-truth spans

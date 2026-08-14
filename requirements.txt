@@ -6,12 +6,14 @@
 streamlit==1.41.1
 openai==1.59.6
 
-langchain==0.3.14
+# langchain-community is deliberately absent: it is being sunset upstream, and
+# its only uses here (Chroma, PyPDFLoader) are covered by langchain-chroma and
+# pypdf directly.
 langchain-core==0.3.29
 langchain-openai==0.2.14
-langchain-community==0.3.14
 langchain-experimental==0.3.4
 langchain-text-splitters==0.3.5
+langchain-chroma==0.2.0
 
 chromadb==0.5.23
 rank-bm25==0.2.2

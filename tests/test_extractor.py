@@ -3,12 +3,18 @@
 import csv
 
 import pytest
+from langchain_core.documents import Document
 
+from src import extractor
 from src.extractor import (
     UnsupportedFormatError,
     extract_text,
     validate_upload,
 )
+
+
+def _doc(text):
+    return Document(page_content=text, metadata={"source": "ignored.pdf", "page": 1})
 
 # ── TXT ───────────────────────────────────────────────────────────────────
 
@@ -120,6 +126,72 @@ def test_extract_docx_includes_table_text(tmp_path):
 
     assert "Executive summary" in content
     assert "42M" in content, "table contents must be extracted, not just paragraphs"
+
+
+# ── PDF fallback chain ────────────────────────────────────────────────────
+#
+# Real PDFs are awkward to build in a test, but the behaviour that actually
+# matters is the chain: each parser is tried in order, a failure moves to the
+# next, and an empty result is treated as a failure rather than success.
+
+def test_pdf_uses_first_parser_that_returns_text(monkeypatch):
+    calls = []
+
+    def working(filepath, filename):
+        calls.append("pypdf")
+        return [_doc("extracted text")]
+
+    def should_not_run(filepath, filename):
+        calls.append("later")
+        raise AssertionError("later parsers must not run after one succeeds")
+
+    monkeypatch.setattr(extractor, "_pdf_pypdf", working)
+    monkeypatch.setattr(extractor, "_pdf_pymupdf", should_not_run)
+    monkeypatch.setattr(extractor, "_pdf_plumber", should_not_run)
+    monkeypatch.setattr(extractor, "_pdf_ocr", should_not_run)
+
+    docs = extractor._extract_pdf("ignored.pdf", "ignored.pdf")
+
+    assert calls == ["pypdf"]
+    assert docs[0].page_content == "extracted text"
+
+
+def test_pdf_falls_through_on_parser_exception(monkeypatch):
+    """A crashing parser must not abort extraction — try the next one."""
+    def exploding(filepath, filename):
+        raise RuntimeError("corrupt xref table")
+
+    def recovering(filepath, filename):
+        return [_doc("recovered by second parser")]
+
+    monkeypatch.setattr(extractor, "_pdf_pypdf", exploding)
+    monkeypatch.setattr(extractor, "_pdf_pymupdf", recovering)
+
+    docs = extractor._extract_pdf("ignored.pdf", "ignored.pdf")
+
+    assert docs[0].page_content == "recovered by second parser"
+
+
+def test_pdf_treats_empty_result_as_failure(monkeypatch):
+    """A parser returning no pages has not succeeded — keep going.
+
+    This is the scanned-PDF case: the parser runs cleanly but finds no text
+    layer, so the chain must continue rather than report success with nothing.
+    """
+    monkeypatch.setattr(extractor, "_pdf_pypdf", lambda f, n: [])
+    monkeypatch.setattr(extractor, "_pdf_pymupdf", lambda f, n: [])
+    monkeypatch.setattr(extractor, "_pdf_plumber", lambda f, n: [_doc("from plumber")])
+
+    docs = extractor._extract_pdf("ignored.pdf", "ignored.pdf")
+
+    assert docs[0].page_content == "from plumber"
+
+
+def test_pdf_returns_empty_when_every_parser_fails(monkeypatch):
+    for name in ("_pdf_pypdf", "_pdf_pymupdf", "_pdf_plumber", "_pdf_ocr"):
+        monkeypatch.setattr(extractor, name, lambda f, n: [])
+
+    assert extractor._extract_pdf("ignored.pdf", "ignored.pdf") == []
 
 
 # ── Format handling ───────────────────────────────────────────────────────

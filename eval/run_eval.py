@@ -27,7 +27,7 @@ import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 EVAL_DIR = Path(__file__).resolve().parent
@@ -369,7 +369,7 @@ def main():
     results_dir.mkdir(exist_ok=True)
 
     payload = {
-        "run_at": datetime.now(timezone.utc).isoformat(),
+        "run_at": datetime.now(UTC).isoformat(),
         "k": args.k,
         "n_chunks": n_chunks,
         "embedding_model": Config.EMBEDDING_MODEL,

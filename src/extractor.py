@@ -85,24 +85,29 @@ def _extract_pdf(filepath, filename):
 
 
 def _pdf_pypdf(filepath, filename):
-    from langchain_community.document_loaders import PyPDFLoader
+    """Fast path for well-formed PDFs.
 
-    pages = PyPDFLoader(filepath).load()
-    pages = [p for p in pages if p.page_content and p.page_content.strip()]
+    Uses pypdf directly rather than LangChain's PyPDFLoader, which would pull
+    in langchain-community — a package now being sunset — for what is a
+    handful of lines.
+    """
+    from pypdf import PdfReader
 
-    for i, page in enumerate(pages):
-        page.metadata["source"] = filename
-        page.metadata["doc_name"] = filename
-        page.metadata.setdefault("page", i + 1)
+    docs = []
+    for i, page in enumerate(PdfReader(filepath).pages):
+        text = page.extract_text()
+        if text and text.strip():
+            docs.append(_make_doc(text, filename, i + 1))
 
-    return pages
+    return docs
 
 
 def _pdf_pymupdf(filepath, filename):
-    import fitz  # PyMuPDF
+    # The `fitz` alias is deprecated upstream in favour of the `pymupdf` name.
+    import pymupdf
 
     docs = []
-    with fitz.open(filepath) as pdf:
+    with pymupdf.open(filepath) as pdf:
         for i, page in enumerate(pdf):
             text = page.get_text()
             if text and text.strip():

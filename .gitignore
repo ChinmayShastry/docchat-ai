@@ -45,3 +45,6 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# Personal interview prep — not part of the project
+INTERVIEW_NOTES.md
