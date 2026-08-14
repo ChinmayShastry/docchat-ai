@@ -1,0 +1,214 @@
+{
+  "corpus": "corpus/northwind_annual_report.txt",
+  "description": "Evaluation set over a synthetic annual report. Each answerable question lists the exact text spans that must be retrieved for the answer to be groundable, which makes retrieval metrics deterministic and free to compute. Unanswerable questions carry no spans and exist to measure whether the system correctly refuses instead of inventing an answer.",
+  "questions": [
+    {
+      "id": "q01",
+      "type": "factual",
+      "question": "What was Northwind's group revenue in fiscal year 2025?",
+      "answer_spans": ["group revenue of 1.42 billion euros"],
+      "ground_truth": "1.42 billion euros, up 6.2% from 1.34 billion euros the prior year.",
+      "answerable": true
+    },
+    {
+      "id": "q02",
+      "type": "numeric",
+      "question": "How much did operating margin improve during the year?",
+      "answer_spans": ["operating margin recovered from 4.1% to 7.8%"],
+      "ground_truth": "It recovered from 4.1% to 7.8%, an improvement of 3.7 percentage points.",
+      "answerable": true
+    },
+    {
+      "id": "q03",
+      "type": "factual",
+      "question": "What dividend did the board recommend, and when will it be paid?",
+      "answer_spans": ["dividend of 0.34 euros per share", "14 March 2026"],
+      "ground_truth": "0.34 euros per share, payable on 14 March 2026 to shareholders on the register as of 28 February 2026. It is the company's first dividend.",
+      "answerable": true
+    },
+    {
+      "id": "q04",
+      "type": "factual",
+      "question": "How much revenue did the Ground Freight segment generate?",
+      "answer_spans": ["748 million euros of\nrevenue"],
+      "ground_truth": "748 million euros, or 52.7% of group revenue.",
+      "answerable": true
+    },
+    {
+      "id": "q05",
+      "type": "numeric",
+      "question": "How fast did Cold Chain revenue grow?",
+      "answer_spans": ["412 million euros,\nup 19.4% year on year"],
+      "ground_truth": "Cold Chain revenue grew 19.4% year on year, to 412 million euros.",
+      "answerable": true
+    },
+    {
+      "id": "q06",
+      "type": "comparison",
+      "question": "Which segment had the highest operating margin and which had the lowest?",
+      "answer_spans": ["Operating margin of 11.2%", "Operating margin was negative at\nminus 1.4%"],
+      "ground_truth": "Cold Chain had the highest at 11.2%; Last Mile had the lowest at minus 1.4%.",
+      "answerable": true
+    },
+    {
+      "id": "q07",
+      "type": "factual",
+      "question": "Which segment declined during the year, and why?",
+      "answer_spans": ["down 3.1% from 268 million", "consumer electronics vertical, where two\nlarge customers moved volume in-house"],
+      "ground_truth": "Last Mile declined 3.1% to 260 million euros, driven by two large consumer electronics customers moving volume in-house.",
+      "answerable": true
+    },
+    {
+      "id": "q08",
+      "type": "numeric",
+      "question": "What share of Cold Chain revenue came from pharmaceutical clients?",
+      "answer_spans": ["Pharmaceutical clients accounted for 58% of Cold Chain revenue"],
+      "ground_truth": "58%.",
+      "answerable": true
+    },
+    {
+      "id": "q09",
+      "type": "factual",
+      "question": "Where are the two new Cold Chain facilities being built?",
+      "answer_spans": ["Rotterdam and Valencia"],
+      "ground_truth": "Rotterdam and Valencia, scheduled to open in the second half of 2026.",
+      "answerable": true
+    },
+    {
+      "id": "q10",
+      "type": "comparison",
+      "question": "Which country market grew fastest, and which is the largest?",
+      "answer_spans": ["Poland grew 24.1% in fiscal 2025, the fastest of any market", "Germany remains the single largest market"],
+      "ground_truth": "Poland grew fastest at 24.1%; Germany is the largest market at 398 million euros (28.0%).",
+      "answerable": true
+    },
+    {
+      "id": "q11",
+      "type": "numeric",
+      "question": "What was total capital expenditure and how did it change?",
+      "answer_spans": ["Total capital expenditure was 118 million euros, down from 176 million euros"],
+      "ground_truth": "118 million euros, down from 176 million euros the prior year.",
+      "answerable": true
+    },
+    {
+      "id": "q12",
+      "type": "multi_hop",
+      "question": "Why was the transport management system migration delayed, and by how long?",
+      "answer_spans": ["eleven weeks\nbehind the original schedule", "data quality problems in\nthe legacy French subsidiary"],
+      "ground_truth": "It finished eleven weeks late because of data quality problems in the legacy French subsidiary's records, requiring manual reconciliation of about 240,000 historical shipment records.",
+      "answerable": true
+    },
+    {
+      "id": "q13",
+      "type": "numeric",
+      "question": "How many historical shipment records had to be reconciled manually?",
+      "answer_spans": ["240,000 historical shipment records"],
+      "ground_truth": "Approximately 240,000.",
+      "answerable": true
+    },
+    {
+      "id": "q14",
+      "type": "factual",
+      "question": "What proportion of the light commercial fleet is electric?",
+      "answer_spans": ["Electric vehicles now represent 12.4% of the light commercial fleet"],
+      "ground_truth": "12.4%, up from 7.1%. The company targets 40% by 2030.",
+      "answerable": true
+    },
+    {
+      "id": "q15",
+      "type": "multi_hop",
+      "question": "Has the company set an electrification target for its heavy tractor fleet?",
+      "answer_spans": ["explicitly declined to\nset a target for the heavy tractor fleet"],
+      "ground_truth": "No. It declined to set one, citing insufficient charging infrastructure on long-haul corridors.",
+      "answerable": true
+    },
+    {
+      "id": "q16",
+      "type": "numeric",
+      "question": "What was total headcount at year end?",
+      "answer_spans": ["9,340 employees"],
+      "ground_truth": "9,340, up from 9,180.",
+      "answerable": true
+    },
+    {
+      "id": "q17",
+      "type": "multi_hop",
+      "question": "How much did driver attrition improve, and what did the pay restructuring cost?",
+      "answer_spans": ["fell from 24.1% to 18.9%", "cost 31 million euros annualised"],
+      "ground_truth": "Driver attrition fell from 24.1% to 18.9%; the restructuring raised base pay ~9.5% and cost 31 million euros annualised.",
+      "answerable": true
+    },
+    {
+      "id": "q18",
+      "type": "numeric",
+      "question": "What percentage of fuel exposure is hedged?",
+      "answer_spans": ["62% of fuel exposure is hedged"],
+      "ground_truth": "Approximately 62%, on a rolling twelve-month basis.",
+      "answerable": true
+    },
+    {
+      "id": "q19",
+      "type": "factual",
+      "question": "How concentrated is the customer base?",
+      "answer_spans": ["ten largest customers represent 31% of group\nrevenue", "represents 6.8% of group revenue"],
+      "ground_truth": "The ten largest customers are 31% of revenue; the single largest, a pharmaceutical distributor, is 6.8%.",
+      "answerable": true
+    },
+    {
+      "id": "q20",
+      "type": "factual",
+      "question": "Were there any security incidents during the year?",
+      "answer_spans": ["two attempted ransomware intrusions"],
+      "ground_truth": "Two attempted ransomware intrusions, both contained without data loss or operational disruption.",
+      "answerable": true
+    },
+    {
+      "id": "q21",
+      "type": "numeric",
+      "question": "What is the revenue growth guidance for fiscal 2026?",
+      "answer_spans": ["revenue growth of between 5% and 8%"],
+      "ground_truth": "Between 5% and 8%, with operating margin of 8.0% to 8.5%.",
+      "answerable": true
+    },
+    {
+      "id": "q22",
+      "type": "multi_hop",
+      "question": "Is Cold Chain expected to become the largest segment by revenue in 2026?",
+      "answer_spans": ["despite\nGround Freight remaining larger by revenue"],
+      "ground_truth": "No. Cold Chain is expected to become the largest contributor to operating profit, but Ground Freight remains larger by revenue.",
+      "answerable": true
+    },
+    {
+      "id": "q23",
+      "type": "unanswerable",
+      "question": "What is the name of Northwind's chief executive?",
+      "answer_spans": [],
+      "ground_truth": "The document does not name the chief executive.",
+      "answerable": false
+    },
+    {
+      "id": "q24",
+      "type": "unanswerable",
+      "question": "How many shares does Northwind have outstanding?",
+      "answer_spans": [],
+      "ground_truth": "The document does not state the share count.",
+      "answerable": false
+    },
+    {
+      "id": "q25",
+      "type": "unanswerable",
+      "question": "What was Northwind's effective corporate tax rate in fiscal 2025?",
+      "answer_spans": [],
+      "ground_truth": "The document does not disclose a tax rate.",
+      "answerable": false
+    },
+    {
+      "id": "q26",
+      "type": "unanswerable",
+      "question": "Which law firm advised Northwind on its 2022 to 2024 acquisitions?",
+      "answer_spans": [],
+      "ground_truth": "The document does not name any advisers.",
+      "answerable": false
+    }
+  ]
+}

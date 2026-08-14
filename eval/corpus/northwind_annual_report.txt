@@ -1,0 +1,180 @@
+NORTHWIND LOGISTICS GROUP
+Annual Report — Fiscal Year 2025
+
+NOTE: This is a synthetic document written for evaluating this retrieval
+system. Northwind Logistics Group does not exist, and every figure below is
+invented. It exists so that retrieval quality can be measured against known
+ground truth without depending on copyrighted material.
+
+
+1. LETTER FROM THE CHIEF EXECUTIVE
+
+Fiscal year 2025 was a year of consolidation for Northwind Logistics Group.
+After three years of aggressive expansion, we deliberately slowed new market
+entry to focus on margin recovery in the regions we already serve. That
+decision cost us roughly four percentage points of revenue growth, and it was
+the right one: operating margin recovered from 4.1% to 7.8% over the year.
+
+Our headline result is group revenue of 1.42 billion euros, up 6.2% on the
+prior year's 1.34 billion euros. Adjusted EBITDA reached 214 million euros.
+Free cash flow turned positive for the first time since 2021, at 61 million
+euros.
+
+The board has recommended a dividend of 0.34 euros per share, the first
+dividend in the company's history. It will be paid on 14 March 2026 to
+shareholders on the register as of 28 February 2026.
+
+
+2. SEGMENT PERFORMANCE
+
+Northwind reports across three operating segments: Ground Freight, Cold Chain,
+and Last Mile.
+
+2.1 Ground Freight
+
+Ground Freight remains our largest segment, contributing 748 million euros of
+revenue, or 52.7% of the group total. Segment operating margin was 8.9%.
+Volumes were broadly flat at 3.1 million shipments, but average revenue per
+shipment rose from 227 euros to 241 euros following the repricing programme
+completed in the second quarter.
+
+The segment operates 1,840 tractor units and 4,210 trailers across fourteen
+countries. Average fleet age fell from 6.2 years to 5.4 years after the
+capital refresh described in section 4.
+
+2.2 Cold Chain
+
+Cold Chain is our fastest-growing segment, with revenue of 412 million euros,
+up 19.4% year on year. It now represents 29.0% of group revenue, compared with
+25.7% in the prior year. Operating margin of 11.2% is the highest of the three
+segments, reflecting the specialised nature of temperature-controlled freight
+and the limited number of competitors able to service it at scale.
+
+Pharmaceutical clients accounted for 58% of Cold Chain revenue, food and
+beverage for 34%, and industrial chemicals for the remaining 8%. The segment
+added 27 new pharmaceutical accounts during the year, including three of the
+ten largest generic manufacturers in Europe.
+
+Cold Chain capacity constraints remain the principal limit on growth. The
+segment operated at 91% average utilisation across the year, and above 97% in
+the fourth quarter. Two new temperature-controlled facilities, in Rotterdam
+and Valencia, are scheduled to open in the second half of 2026.
+
+2.3 Last Mile
+
+Last Mile generated 260 million euros of revenue, down 3.1% from 268 million
+euros. This was the only segment to decline. Operating margin was negative at
+minus 1.4%, an improvement from minus 5.6% in the prior year but still loss
+making.
+
+The decline was concentrated in the consumer electronics vertical, where two
+large customers moved volume in-house. Management does not expect Last Mile to
+reach breakeven before fiscal 2027.
+
+
+3. GEOGRAPHIC BREAKDOWN
+
+Revenue by region:
+
+  Germany           398 million euros    28.0%
+  France            256 million euros    18.0%
+  Netherlands       213 million euros    15.0%
+  Spain             184 million euros    13.0%
+  Poland            156 million euros    11.0%
+  Italy             128 million euros     9.0%
+  Rest of Europe     85 million euros     6.0%
+
+Germany remains the single largest market, though its share has declined from
+31.2% two years ago as Poland and Spain have grown faster than the group
+average. Poland grew 24.1% in fiscal 2025, the fastest of any market.
+
+Northwind has no operations outside Europe and does not currently intend to
+enter North American or Asian markets.
+
+
+4. CAPITAL EXPENDITURE AND FLEET
+
+Total capital expenditure was 118 million euros, down from 176 million euros
+in the prior year. The reduction reflects the completion of the fleet refresh
+programme begun in 2023.
+
+Capital expenditure by category:
+
+  Vehicle replacement       61 million euros
+  Facility construction     29 million euros
+  Technology and systems    19 million euros
+  Other                      9 million euros
+
+The technology spend of 19 million euros funded the rollout of the new
+transport management system, which replaced four legacy systems inherited
+through acquisition. The migration completed in November 2025, eleven weeks
+behind the original schedule. The delay was caused by data quality problems in
+the legacy French subsidiary's records, which required manual reconciliation
+of approximately 240,000 historical shipment records.
+
+Electric vehicles now represent 12.4% of the light commercial fleet, up from
+7.1%. The company has committed to 40% by 2030 but has explicitly declined to
+set a target for the heavy tractor fleet, citing insufficient charging
+infrastructure on long-haul corridors.
+
+
+5. WORKFORCE
+
+Total headcount at year end was 9,340 employees, compared with 9,180 a year
+earlier. The increase of 160 net roles masks significant internal movement:
+420 roles were added in Cold Chain operations while 190 were removed from Last
+Mile and 70 from central administrative functions.
+
+Voluntary attrition was 14.2%, down from 17.8%. Driver attrition specifically
+fell from 24.1% to 18.9% following the pay restructuring agreed with works
+councils in March 2025. That restructuring increased driver base pay by an
+average of 9.5% and cost 31 million euros annualised.
+
+Women represent 27% of total headcount and 19% of senior management roles. The
+company has set a target of 30% of senior management roles by 2028.
+
+Lost-time injury frequency was 4.8 per million hours worked, an improvement
+from 6.1. There were no workplace fatalities during the year.
+
+
+6. RISK FACTORS
+
+Management considers the following the principal risks to the business.
+
+Fuel price volatility. Approximately 62% of fuel exposure is hedged on a
+rolling twelve-month basis. A sustained 10% increase in unhedged diesel prices
+would reduce operating profit by an estimated 11 million euros annually.
+
+Customer concentration. The ten largest customers represent 31% of group
+revenue. The single largest customer, a pharmaceutical distributor served by
+Cold Chain, represents 6.8% of group revenue. The loss of that customer would
+be material.
+
+Regulatory change. Proposed European Union restrictions on driver hours could
+reduce effective fleet utilisation. Management estimates the impact at between
+8 and 14 million euros of annual operating profit, depending on the final form
+of the legislation.
+
+Cyber security. The company experienced two attempted ransomware intrusions
+during the year, both contained without data loss or operational disruption.
+Security spending increased to 4.2 million euros from 2.6 million euros.
+
+Integration risk. Three acquisitions completed between 2022 and 2024 are not
+yet fully integrated onto common systems. Management expects integration to
+complete during fiscal 2027.
+
+
+7. OUTLOOK
+
+For fiscal 2026, management guides to revenue growth of between 5% and 8%, and
+operating margin of between 8.0% and 8.5%. Capital expenditure is expected to
+be approximately 130 million euros, weighted toward the two new Cold Chain
+facilities.
+
+Management expects Cold Chain to exceed 30% of group revenue during fiscal
+2026 and to become the largest contributor to group operating profit, despite
+Ground Freight remaining larger by revenue.
+
+The guidance assumes no material deterioration in European industrial output
+and no adverse final outcome from the driver-hours legislation described in
+section 6.
