@@ -1,14 +1,27 @@
-streamlit
-openai
-langchain
-langchain-openai
-langchain-community
-langchain-experimental
-sentence-transformers
-rank-bm25
-chromadb
-pandas
-openpyxl
-python-docx
-protobuf==3.20.3
-pymupdf
+# Runtime dependencies.
+# Pinned to exact versions so a fresh install reproduces the environment these
+# eval numbers were measured on. LangChain in particular has a history of
+# breaking changes across minor releases.
+
+streamlit==1.41.1
+openai==1.59.6
+
+langchain==0.3.14
+langchain-core==0.3.29
+langchain-openai==0.2.14
+langchain-community==0.3.14
+langchain-experimental==0.3.4
+langchain-text-splitters==0.3.5
+
+chromadb==0.5.23
+rank-bm25==0.2.2
+sentence-transformers==3.3.1
+
+pypdf==5.1.0
+pymupdf==1.25.1
+pdfplumber==0.11.5
+python-docx==1.1.2
+openpyxl==3.1.5
+pandas==2.2.3
+
+protobuf==5.29.3
