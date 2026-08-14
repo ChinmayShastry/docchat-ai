@@ -49,9 +49,17 @@ class Config:
     # Strategy used by HybridRetriever.retrieve(). One of:
     #   "bm25"          — keyword scoring only
     #   "semantic"      — embedding similarity only
-    #   "hybrid"        — alpha-weighted blend of both
-    #   "hybrid_rerank" — blend, then cross-encoder rerank (production default)
-    RETRIEVAL_MODE = _env_str("RETRIEVAL_MODE", "hybrid_rerank")
+    #   "hybrid"        — alpha-weighted blend of both (default)
+    #   "hybrid_rerank" — blend, then cross-encoder rerank
+    #
+    # Default is "hybrid", not "hybrid_rerank", on the evidence in
+    # eval/results/: reranking scored at or below plain hybrid at two
+    # different chunk granularities (33 and 74 chunks) while costing 3-4x the
+    # latency. Cross-encoders are expected to pay off when refining a shortlist
+    # drawn from a much larger index than this corpus provides, so this is a
+    # finding about the current benchmark rather than about rerankers — see the
+    # caveat in the README before generalising it.
+    RETRIEVAL_MODE = _env_str("RETRIEVAL_MODE", "hybrid")
 
     # Weight balance between BM25 (keyword) and semantic search.
     # 0.0 = pure BM25, 1.0 = pure semantic, 0.5 = equal blend

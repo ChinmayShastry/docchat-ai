@@ -1,0 +1,1368 @@
+{
+  "run_at": "2026-08-14T10:36:07.921072+00:00",
+  "k": 4,
+  "n_chunks": 33,
+  "embedding_model": "text-embedding-3-small",
+  "llm_model": "gpt-4o-mini",
+  "retrieval_only": false,
+  "summaries": [
+    {
+      "mode": "bm25",
+      "n_answerable": 22,
+      "hit_rate": 0.9545,
+      "span_coverage": 0.9318,
+      "mrr": 0.7121,
+      "elapsed_seconds": 66.2,
+      "faithfulness": 1.0,
+      "correctness": 0.8636,
+      "refusal_accuracy": 1.0
+    },
+    {
+      "mode": "semantic",
+      "n_answerable": 22,
+      "hit_rate": 0.8636,
+      "span_coverage": 0.8636,
+      "mrr": 0.5985,
+      "elapsed_seconds": 88.4,
+      "faithfulness": 1.0,
+      "correctness": 0.8182,
+      "refusal_accuracy": 1.0
+    },
+    {
+      "mode": "hybrid",
+      "n_answerable": 22,
+      "hit_rate": 1.0,
+      "span_coverage": 0.9773,
+      "mrr": 0.7803,
+      "elapsed_seconds": 86.8,
+      "faithfulness": 1.0,
+      "correctness": 0.9545,
+      "refusal_accuracy": 1.0
+    },
+    {
+      "mode": "hybrid_rerank",
+      "n_answerable": 22,
+      "hit_rate": 0.9545,
+      "span_coverage": 0.9318,
+      "mrr": 0.7689,
+      "elapsed_seconds": 199.0,
+      "faithfulness": 1.0,
+      "correctness": 0.8636,
+      "refusal_accuracy": 1.0
+    }
+  ],
+  "detail": [
+    {
+      "mode": "bm25",
+      "elapsed_seconds": 66.2,
+      "rows": [
+        {
+          "id": "q01",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's group revenue in fiscal year 2025 was 1.42 billion euros, up 6.2% from the prior year's 1.34 billion euros [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q02",
+          "type": "numeric",
+          "retrieval": {
+            "hit": false,
+            "coverage": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "answer": "I don't see that information in the document(s).",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer correctly states that the information is not available, but it fails to convey the actual improvement in operating margin."
+        },
+        {
+          "id": "q03",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "The board of Northwind Logistics Group recommended a dividend of 0.34 euros per share, which will be paid on 14 March 2026 to shareholders on the register as of 28 February 2026 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q04",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's Ground Freight segment generated 748 million euros of revenue, which is 52.7% of the group total [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q05",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's Cold Chain revenue grew by 19.4% year on year in fiscal 2025 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the growth rate of Cold Chain revenue as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q06",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "Among Northwind's segments, the Cold Chain segment had the highest operating margin at 11.2%, while the Last Mile segment had the lowest operating margin at minus 1.4% [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the operating margins of the Cold Chain and Last Mile segments as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q07",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "The Last Mile segment declined during fiscal 2025, generating 260 million euros of revenue, down 3.1% from 268 million euros. The decline was concentrated in the consumer electronics vertical, where two large customers moved volume in-house. Management does not expect Last Mile to reach breakeven before fiscal 2027 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q08",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Pharmaceutical clients accounted for 58% of Cold Chain revenue [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q09",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's two new Cold Chain facilities are being built in Rotterdam and Valencia, scheduled to open in the second half of 2026 [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q10",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "In Northwind's geographic breakdown, Poland grew the fastest at 24.1%, while Germany remains the largest market with 398 million euros in revenue, accounting for 28.0% of total revenue [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q11",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's total capital expenditure in fiscal 2025 was 118 million euros, which was a decrease from 176 million euros in the prior year [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the total capital expenditure and its change as stated in the retrieved context."
+        },
+        {
+          "id": "q12",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 0.5,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's transport management system migration was delayed due to the completion of the rollout of the new system, which replaced four legacy systems inherited through acquisition. The migration was completed eleven weeks behind the original schedule [Doc1].",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer incorrectly attributes the delay to the completion of the rollout rather than data quality problems."
+        },
+        {
+          "id": "q13",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind had to reconcile approximately 240,000 historical shipment records manually due to data quality problems in the legacy French subsidiary's records [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q14",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "Electric vehicles represent 12.4% of Northwind's light commercial fleet, up from 7.1% [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q15",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "No, Northwind has explicitly declined to set a target for the heavy tractor fleet, citing insufficient charging infrastructure on long-haul corridors [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the context regarding Northwind's decision on heavy tractor electrification."
+        },
+        {
+          "id": "q16",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's total headcount at the end of fiscal 2025 was 9,340 employees [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the total headcount for Northwind at the end of fiscal 2025 as stated in the retrieved context."
+        },
+        {
+          "id": "q17",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's driver attrition improved from 24.1% to 18.9%. The pay restructuring cost 31 million euros annualised [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q18",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Approximately 62% of Northwind's fuel exposure is hedged on a rolling twelve-month basis [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the hedged percentage from the retrieved context."
+        },
+        {
+          "id": "q19",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's customer base is concentrated, with the ten largest customers representing 31% of group revenue. The single largest customer, a pharmaceutical distributor served by Cold Chain, accounts for 6.8% of group revenue, and the loss of that customer would be material [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q20",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Yes, Northwind experienced two attempted ransomware intrusions during fiscal 2025, both of which were contained without data loss or operational disruption [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q21",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's revenue growth guidance for fiscal 2026 is between 5% and 8% [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the revenue growth guidance for Northwind as stated in the retrieved context."
+        },
+        {
+          "id": "q22",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Yes, Northwind expects Cold Chain to exceed 30% of group revenue during fiscal 2026 and to become the largest contributor to group operating profit, despite Ground Freight remaining larger by revenue [Doc2].",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer incorrectly states that Cold Chain is expected to become the largest segment by revenue, which is not supported by the context."
+        },
+        {
+          "id": "q23",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q24",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q25",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q26",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        }
+      ]
+    },
+    {
+      "mode": "semantic",
+      "elapsed_seconds": 88.4,
+      "rows": [
+        {
+          "id": "q01",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's group revenue in fiscal year 2025 was 1.42 billion euros, up 6.2% from the prior year's 1.34 billion euros [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q02",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's operating margin improved from 4.1% to 7.8% during fiscal 2025, an increase of 3.7 percentage points [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q03",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "The board of Northwind recommended a dividend of 0.34 euros per share, which will be paid on 14 March 2026 to shareholders on the register as of 28 February 2026 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q04",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's Ground Freight segment generated 748 million euros of revenue, which is 52.7% of the group total [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the revenue and percentage of group total for Northwind's Ground Freight segment as stated in the retrieved context."
+        },
+        {
+          "id": "q05",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's Cold Chain revenue grew by 19.4% year on year in fiscal 2025 [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the growth rate of Cold Chain revenue as stated in the retrieved context."
+        },
+        {
+          "id": "q06",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Among Northwind's segments, the Cold Chain had the highest operating margin at 11.2%, while the Last Mile had the lowest operating margin at minus 1.4% [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the operating margins of Cold Chain and Last Mile as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q07",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "The Last Mile segment declined during fiscal 2025, generating 260 million euros of revenue, down 3.1% from 268 million euros. The decline was concentrated in the consumer electronics vertical, where two large customers moved volume in-house [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q08",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Pharmaceutical clients accounted for 58% of Cold Chain revenue [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q09",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's two new Cold Chain facilities are being built in Rotterdam and Valencia, scheduled to open in the second half of 2026 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q10",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "In Northwind's geographic breakdown, Poland grew the fastest at 24.1%, while Germany remains the largest market with 398 million euros in revenue, accounting for 28.0% of total revenue [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q11",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's total capital expenditure in fiscal 2025 was 118 million euros, which was down from 176 million euros in the prior year [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the total capital expenditure and its change as stated in the retrieved context."
+        },
+        {
+          "id": "q12",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": false,
+            "coverage": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "answer": "I don't see that information in the document(s).",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer correctly states that the information is not available, but it fails to convey the specific details about the delay and its cause."
+        },
+        {
+          "id": "q13",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.25
+          },
+          "answer": "Northwind had to reconcile approximately 240,000 historical shipment records manually [Doc4].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q14",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Electric vehicles now represent 12.4% of Northwind's light commercial fleet, up from 7.1% [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q15",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "No, Northwind has explicitly declined to set a target for the heavy tractor fleet, citing insufficient charging infrastructure on long-haul corridors [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information in the retrieved context."
+        },
+        {
+          "id": "q16",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.25
+          },
+          "answer": "Northwind's total headcount at the end of fiscal 2025 was 9,340 employees, compared with 9,180 a year earlier [Doc4].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the total headcount and the comparison to the previous year as stated in the retrieved context."
+        },
+        {
+          "id": "q17",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's driver attrition improved from 24.1% to 18.9%, a reduction of 5.2 percentage points. The pay restructuring cost 31 million euros annualised [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the driver attrition improvement and the cost of the pay restructuring as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q18",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Approximately 62% of Northwind's fuel exposure is hedged on a rolling twelve-month basis [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the hedged percentage stated in the retrieved context."
+        },
+        {
+          "id": "q19",
+          "type": "factual",
+          "retrieval": {
+            "hit": false,
+            "coverage": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "answer": "I don't see that information in the document(s).",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer correctly states that the information is not available, but it fails to convey the specific details about customer concentration found in the reference answer."
+        },
+        {
+          "id": "q20",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "Yes, Northwind experienced two attempted ransomware intrusions during fiscal 2025, both of which were contained without data loss or operational disruption [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q21",
+          "type": "numeric",
+          "retrieval": {
+            "hit": false,
+            "coverage": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "answer": "I don't see that information in the document(s).",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer correctly states that the information is not present, but it fails to convey the specific revenue growth guidance of 5% to 8% as stated in the reference answer."
+        },
+        {
+          "id": "q22",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Yes, Northwind expects Cold Chain to exceed 30% of group revenue during fiscal 2026 and to become the largest contributor to group operating profit, despite Ground Freight remaining larger by revenue [Doc2].",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer incorrectly states that Cold Chain is expected to become the largest segment by revenue, while it is only the largest contributor to operating profit."
+        },
+        {
+          "id": "q23",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q24",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q25",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q26",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        }
+      ]
+    },
+    {
+      "mode": "hybrid",
+      "elapsed_seconds": 86.8,
+      "rows": [
+        {
+          "id": "q01",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's group revenue in fiscal year 2025 was 1.42 billion euros, up 6.2% from the prior year's 1.34 billion euros [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q02",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's operating margin improved from 4.1% to 7.8% during fiscal 2025, an increase of 3.7 percentage points [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the improvement in Northwind's operating margin as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q03",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's board recommended a dividend of 0.34 euros per share, which will be paid on 14 March 2026 to shareholders on the register as of 28 February 2026 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q04",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's Ground Freight segment generated 748 million euros of revenue [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the revenue generated by Northwind's Ground Freight segment as stated in the retrieved context."
+        },
+        {
+          "id": "q05",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's Cold Chain revenue grew by 19.4% year on year in fiscal 2025 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the growth rate of Cold Chain revenue as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q06",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Among Northwind's segments, the Cold Chain segment had the highest operating margin at 11.2%, while the Last Mile segment had the lowest operating margin at minus 1.4% [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the operating margins of the Cold Chain and Last Mile segments as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q07",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "The Last Mile segment declined during fiscal 2025, generating 260 million euros of revenue, down 3.1% from 268 million euros. The decline was concentrated in the consumer electronics vertical, where two large customers moved volume in-house. Management does not expect Last Mile to reach breakeven before fiscal 2027 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q08",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Pharmaceutical clients accounted for 58% of Cold Chain revenue [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q09",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's two new Cold Chain facilities are being built in Rotterdam and Valencia, scheduled to open in the second half of 2026 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q10",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "In Northwind's geographic breakdown, Poland grew the fastest at 24.1%, while Germany is the largest market with 398 million euros in revenue, accounting for 28.0% of total revenue [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q11",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's total capital expenditure in fiscal 2025 was 118 million euros, down from 176 million euros in the prior year [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q12",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 0.5,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's transport management system migration was delayed due to the complexity of replacing four legacy systems inherited through acquisition. The migration was completed eleven weeks behind the original schedule, finishing in November 2025 [Doc1].",
+          "faithful": true,
+          "correct": false,
+          "reason": "The SYSTEM ANSWER does not mention the data quality problems or the manual reconciliation of shipment records."
+        },
+        {
+          "id": "q13",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind had to reconcile approximately 240,000 historical shipment records manually due to data quality problems in the legacy French subsidiary's records [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q14",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "Electric vehicles now represent 12.4% of Northwind's light commercial fleet, up from 7.1% [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q15",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "No, Northwind has explicitly declined to set a target for the heavy tractor fleet, citing insufficient charging infrastructure on long-haul corridors [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the context regarding Northwind's decision on heavy tractor electrification."
+        },
+        {
+          "id": "q16",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's total headcount at the end of fiscal 2025 was 9,340 employees [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the total headcount of Northwind at the end of fiscal 2025 as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q17",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's driver attrition improved from 24.1% to 18.9%, a decrease of 5.2 percentage points. The pay restructuring cost 31 million euros annualised [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q18",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Approximately 62% of Northwind's fuel exposure is hedged on a rolling twelve-month basis [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the hedged percentage as stated in the retrieved context."
+        },
+        {
+          "id": "q19",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's customer base is concentrated, with the ten largest customers representing 31% of group revenue. The single largest customer, a pharmaceutical distributor served by Cold Chain, accounts for 6.8% of group revenue, indicating that the loss of this customer would be material [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q20",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Yes, Northwind experienced two attempted ransomware intrusions during the year, both of which were contained without data loss or operational disruption [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q21",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "Northwind's revenue growth guidance for fiscal 2026 is between 5% and 8% [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the revenue growth guidance for Northwind as stated in the retrieved context."
+        },
+        {
+          "id": "q22",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "No, Northwind does not expect Cold Chain to become its largest segment by revenue in fiscal 2026. Ground Freight is expected to remain larger by revenue, although Cold Chain is anticipated to exceed 30% of group revenue and become the largest contributor to group operating profit during that fiscal year [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q23",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q24",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q25",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q26",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        }
+      ]
+    },
+    {
+      "mode": "hybrid_rerank",
+      "elapsed_seconds": 199.0,
+      "rows": [
+        {
+          "id": "q01",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's group revenue in fiscal year 2025 was 1.42 billion euros, up 6.2% from the prior year's 1.34 billion euros [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q02",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's operating margin improved from 4.1% to 7.8% during fiscal 2025, an increase of 3.7 percentage points [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q03",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "The board of Northwind Logistics Group recommended a dividend of 0.34 euros per share, which will be paid on 14 March 2026 to shareholders on the register as of 28 February 2026 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q04",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's Ground Freight segment generated 748 million euros of revenue, which is 52.7% of the group total [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q05",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's Cold Chain revenue grew by 19.4% year on year in fiscal 2025 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the growth rate of Cold Chain revenue as stated in the retrieved context."
+        },
+        {
+          "id": "q06",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Among Northwind's segments, Cold Chain had the highest operating margin at 11.2%, while Last Mile had the lowest operating margin at minus 1.4% [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the operating margins of Cold Chain and Last Mile as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q07",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "The Last Mile segment declined during fiscal 2025, generating 260 million euros of revenue, down 3.1% from 268 million euros. The decline was concentrated in the consumer electronics vertical, where two large customers moved volume in-house [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q08",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Pharmaceutical clients accounted for 58% of Cold Chain revenue [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q09",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's two new Cold Chain facilities are being built in Rotterdam and Valencia, scheduled to open in the second half of 2026 [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q10",
+          "type": "comparison",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "In Northwind's geographic breakdown, Poland grew fastest at 24.1% in fiscal 2025, while Germany remains the largest market with 398 million euros in revenue, accounting for 28.0% of total revenue [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q11",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Northwind's total capital expenditure in fiscal 2025 was 118 million euros, down from 176 million euros in the prior year [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the total capital expenditure and its change as stated in the retrieved context."
+        },
+        {
+          "id": "q12",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 0.5,
+            "reciprocal_rank": 0.25
+          },
+          "answer": "The delay in Northwind's transport management system migration was caused by data quality problems in the legacy French subsidiary's records, which required manual reconciliation of approximately 240,000 historical shipment records. The document does not specify the exact duration of the delay. I don't see that information in the document(s).",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer correctly identifies the cause of the delay but fails to mention the duration of the delay, which is specified in the reference answer."
+        },
+        {
+          "id": "q13",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind had to reconcile approximately 240,000 historical shipment records manually due to data quality problems in the legacy French subsidiary's records [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q14",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Electric vehicles represent 12.4% of Northwind's light commercial fleet, up from 7.1% [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q15",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind has explicitly declined to set a target for the heavy tractor fleet, citing insufficient charging infrastructure on long-haul corridors [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information in the retrieved context."
+        },
+        {
+          "id": "q16",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "Northwind's total headcount at the end of fiscal 2025 was 9,340 employees, compared with 9,180 a year earlier [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the total headcount and the comparison to the previous year as stated in the retrieved context."
+        },
+        {
+          "id": "q17",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Northwind's driver attrition improved from 24.1% to 18.9%, a reduction of 5.2 percentage points. The pay restructuring cost 31 million euros annualised [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the information provided in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q18",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Approximately 62% of Northwind's fuel exposure is hedged on a rolling twelve-month basis [Doc2].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q19",
+          "type": "factual",
+          "retrieval": {
+            "hit": false,
+            "coverage": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "answer": "I don't see that information in the document(s).",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer correctly states that the information is not available, but it fails to convey the specific details about customer concentration found in the reference answer."
+        },
+        {
+          "id": "q20",
+          "type": "factual",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "answer": "Yes, Northwind experienced two attempted ransomware intrusions during fiscal 2025, both of which were contained without data loss or operational disruption [Doc1].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The system answer accurately reflects the information provided in the retrieved context."
+        },
+        {
+          "id": "q21",
+          "type": "numeric",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "answer": "Northwind's revenue growth guidance for fiscal 2026 is between 5% and 8% [Doc3].",
+          "faithful": true,
+          "correct": true,
+          "reason": "The SYSTEM ANSWER accurately reflects the revenue growth guidance for fiscal 2026 as stated in the RETRIEVED CONTEXT."
+        },
+        {
+          "id": "q22",
+          "type": "multi_hop",
+          "retrieval": {
+            "hit": true,
+            "coverage": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "answer": "Yes, Northwind expects Cold Chain to exceed 30% of group revenue during fiscal 2026 and to become the largest contributor to group operating profit, despite Ground Freight remaining larger by revenue [Doc2].",
+          "faithful": true,
+          "correct": false,
+          "reason": "The system answer incorrectly states that Cold Chain is expected to become the largest segment by revenue, while the reference answer clarifies that Ground Freight remains larger by revenue."
+        },
+        {
+          "id": "q23",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q24",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q25",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        },
+        {
+          "id": "q26",
+          "type": "unanswerable",
+          "retrieval": null,
+          "answer": "I don't see that information in the document(s).",
+          "refused": true,
+          "faithful": true,
+          "correct": true
+        }
+      ]
+    }
+  ]
+}

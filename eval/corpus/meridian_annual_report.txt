@@ -1,0 +1,165 @@
+MERIDIAN FREIGHT PARTNERS
+Annual Report — Fiscal Year 2025
+
+NOTE: Synthetic distractor document for retrieval evaluation. Meridian Freight
+Partners does not exist. It deliberately mirrors the structure and vocabulary
+of the Northwind report with different figures, so that retrieval must
+distinguish between sources rather than merely matching topic.
+
+
+1. LETTER FROM THE CHIEF EXECUTIVE
+
+Fiscal year 2025 was a year of expansion for Meridian Freight Partners. Unlike
+much of the sector, we accelerated new market entry, accepting margin pressure
+in exchange for position. Operating margin declined from 9.4% to 6.1% as a
+result, which the board considers an acceptable cost of growth.
+
+Group revenue was 2.18 billion euros, up 14.7% on the prior year's 1.90
+billion euros. Adjusted EBITDA was 289 million euros. Free cash flow was
+negative at minus 44 million euros, reflecting the capital intensity of the
+expansion programme.
+
+No dividend is recommended for fiscal 2025. The board intends to review
+capital returns once free cash flow is sustainably positive, which management
+expects in fiscal 2027.
+
+
+2. SEGMENT PERFORMANCE
+
+Meridian reports across four operating segments: Road, Rail, Air Charter, and
+Contract Logistics.
+
+2.1 Road
+
+Road contributed 981 million euros of revenue, or 45.0% of the group total.
+Segment operating margin was 5.2%. Volumes rose to 4.7 million shipments from
+4.1 million. Average revenue per shipment fell from 214 euros to 209 euros,
+reflecting competitive pricing in newly entered markets.
+
+The segment operates 2,640 tractor units and 6,100 trailers across nineteen
+countries. Average fleet age is 7.1 years, up from 6.8 years, as the expansion
+programme took priority over replacement.
+
+2.2 Rail
+
+Rail generated 545 million euros, up 9.1%. Operating margin was 8.4%. The
+segment benefits from long-term contracts with three national infrastructure
+operators, the earliest of which expires in 2031.
+
+Rail volumes are measured in tonne-kilometres rather than shipments, and
+reached 18.4 billion tonne-kilometres.
+
+2.3 Air Charter
+
+Air Charter is the smallest segment at 218 million euros of revenue, up 41.2%
+from 154 million euros — the fastest growth in the group. Operating margin was
+12.9%, the highest of the four segments.
+
+Growth was driven by time-critical automotive components, which represented
+64% of segment revenue. Management cautions that this concentration makes the
+segment vulnerable to a single sector's production cycles.
+
+2.4 Contract Logistics
+
+Contract Logistics generated 436 million euros, up 6.8%. Operating margin was
+4.9%. The segment operates 41 warehouses totalling 1.2 million square metres.
+
+Warehouse utilisation averaged 84%, below the 90% management considers
+efficient. Three underperforming sites in Portugal and Greece are under
+review.
+
+
+3. GEOGRAPHIC BREAKDOWN
+
+Revenue by region:
+
+  France            523 million euros    24.0%
+  Germany           480 million euros    22.0%
+  Italy             327 million euros    15.0%
+  Spain             283 million euros    13.0%
+  United Kingdom    240 million euros    11.0%
+  Czech Republic    174 million euros     8.0%
+  Rest of Europe    151 million euros     7.0%
+
+France is the largest market, reflecting the company's origins. The United
+Kingdom was entered in 2023 and has grown fastest, at 52.3% in fiscal 2025,
+though from a small base.
+
+Meridian operates a small Air Charter presence in Morocco and Tunisia, its
+only activity outside Europe, contributing 31 million euros.
+
+
+4. CAPITAL EXPENDITURE AND FLEET
+
+Total capital expenditure was 312 million euros, up from 198 million euros.
+
+Capital expenditure by category:
+
+  Warehouse construction   134 million euros
+  Vehicle acquisition       98 million euros
+  Rail terminal upgrades    47 million euros
+  Technology and systems    23 million euros
+  Other                     10 million euros
+
+The technology spend of 23 million euros funded a warehouse management system
+replacement and the first phase of a telematics rollout. The warehouse system
+went live on schedule in August 2025.
+
+Electric vehicles represent 6.2% of the light commercial fleet, up from 3.8%.
+Meridian has set a target of 25% by 2030, and unlike several peers has also
+committed to a heavy tractor target of 10% by 2032.
+
+
+5. WORKFORCE
+
+Total headcount at year end was 14,720 employees, up from 12,940. The increase
+of 1,780 reflects both organic hiring and the acquisition of a Czech road
+haulier in April 2025, which added 640 employees.
+
+Voluntary attrition was 19.6%, up from 18.1%. Driver attrition was 26.4%, and
+management acknowledges this as a material operational risk. A pay review is
+scheduled for the first quarter of fiscal 2026.
+
+Women represent 24% of total headcount and 15% of senior management roles.
+
+Lost-time injury frequency was 7.2 per million hours worked, up from 6.9.
+There was one workplace fatality during the year, at a Czech warehouse site in
+September 2025. An external investigation concluded in January 2026 and its
+recommendations are being implemented.
+
+
+6. RISK FACTORS
+
+Fuel price volatility. Approximately 38% of fuel exposure is hedged. A
+sustained 10% increase in unhedged diesel prices would reduce operating profit
+by an estimated 19 million euros annually.
+
+Customer concentration. The ten largest customers represent 44% of group
+revenue. The single largest, an automotive manufacturer served by Air Charter
+and Road, represents 11.2% of group revenue.
+
+Integration risk. The Czech acquisition is being integrated onto group systems
+during fiscal 2026. Management notes that its two prior acquisitions each took
+longer than planned.
+
+Leverage. Net debt to adjusted EBITDA was 3.4 times at year end, up from 2.6
+times. The covenant threshold is 4.0 times. Management has stated it will slow
+capital expenditure if the ratio approaches 3.8 times.
+
+Regulatory change. Proposed European Union restrictions on driver hours could
+reduce effective fleet utilisation. Meridian estimates the impact at between
+14 and 22 million euros of annual operating profit.
+
+
+7. OUTLOOK
+
+For fiscal 2026, management guides to revenue growth of between 10% and 13%,
+and operating margin of between 6.0% and 6.8%. Capital expenditure is expected
+to fall to approximately 240 million euros as the warehouse programme
+completes.
+
+Management expects Air Charter to remain the fastest-growing segment but does
+not expect it to exceed 12% of group revenue before fiscal 2028.
+
+The guidance assumes the Czech integration completes without material
+disruption and that net debt to adjusted EBITDA does not exceed 3.8 times.

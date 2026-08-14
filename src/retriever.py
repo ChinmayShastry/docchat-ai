@@ -18,6 +18,7 @@
 
 import hashlib
 import re
+import warnings
 from functools import lru_cache
 
 import numpy as np
@@ -126,7 +127,15 @@ class HybridRetriever:
         if k == 0:
             return {}
 
-        results = self.vectorstore.similarity_search_with_relevance_scores(query, k=k)
+        # Chroma warns when its relevance scores fall outside 0-1, which they
+        # routinely do — the cosine-distance conversion yields negative values
+        # for weakly-related chunks. That is harmless here because the scores
+        # are min-max normalised below before being combined, and only their
+        # relative order matters. Suppressed to keep eval output readable.
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", message=".*Relevance scores must be between.*")
+            results = self.vectorstore.similarity_search_with_relevance_scores(query, k=k)
+
         if not results:
             return {}
 

@@ -96,6 +96,19 @@ def load_dataset():
         return json.load(handle)
 
 
+def load_corpus_files():
+    """Every document indexed during evaluation, primary first.
+
+    The distractors matter as much as the target document: with a single short
+    report the index is small enough that retrieving k=4 returns a large
+    fraction of it, every strategy scores near-perfectly, and the benchmark
+    cannot discriminate. Distractors that share vocabulary but hold different
+    figures force retrieval to identify the right *source*, not just the right
+    topic.
+    """
+    return sorted((EVAL_DIR / "corpus").glob("*.txt"))
+
+
 def validate_dataset(dataset, corpus_text):
     """Fail fast if a ground-truth span is not actually in the corpus.
 
@@ -311,9 +324,10 @@ def main():
     # dataset should be catchable without spending anything.
     if args.validate_only:
         dataset = load_dataset()
-        corpus_text = (EVAL_DIR / dataset["corpus"]).read_text(encoding="utf-8")
+        corpus_text = (EVAL_DIR / dataset["primary_corpus"]).read_text(encoding="utf-8")
         validate_dataset(dataset, corpus_text)
         print(f"All ground-truth spans found. {len(dataset['questions'])} questions OK.")
+        print(f"Corpus: {len(load_corpus_files())} documents.")
         return
 
     api_key = os.getenv("OPENAI_API_KEY")
@@ -331,17 +345,20 @@ def main():
     Config.ENABLE_GROUNDEDNESS_CHECK = False
 
     dataset = load_dataset()
-    corpus_path = EVAL_DIR / dataset["corpus"]
-    corpus_text = corpus_path.read_text(encoding="utf-8")
-
-    validate_dataset(dataset, corpus_text)
+    primary_path = EVAL_DIR / dataset["primary_corpus"]
+    validate_dataset(dataset, primary_path.read_text(encoding="utf-8"))
 
     client = OpenAI(api_key=api_key)
 
-    log.info("Building index from %s", corpus_path.name)
-    docs = extract_text(str(corpus_path), corpus_path.name)
+    corpus_files = load_corpus_files()
+    log.info("Building index from %d document(s)", len(corpus_files))
+
+    docs = []
+    for path in corpus_files:
+        docs.extend(extract_text(str(path), path.name))
+
     retriever, n_chunks = build_index(docs, api_key)
-    log.info("Index ready: %d chunks", n_chunks)
+    log.info("Index ready: %d chunks across %d documents", n_chunks, len(corpus_files))
 
     # Every mode shares one index, so embeddings are paid for exactly once.
     chunks, vectorstore = retriever.chunks, retriever.vectorstore

@@ -35,7 +35,43 @@ where each question declares the exact text spans required to answer it. Retriev
 metrics are deterministic span matching; generation metrics use an LLM judge.
 
 <!-- EVAL_RESULTS_START -->
-*Populate by running `python eval/run_eval.py` — see [Evaluation](#evaluation).*
+Corpus: 3 documents / 33 chunks. k=4. `text-embedding-3-small` + `gpt-4o-mini`.
+22 answerable questions, 4 unanswerable.
+
+| Mode | Hit@k | Coverage | MRR | Faithful | Correct | Refusal acc. | Time |
+|---|---|---|---|---|---|---|---|
+| `bm25` | 95.5% | 93.2% | 71.2% | 100.0% | 86.4% | 100.0% | 66s |
+| `semantic` | 86.4% | 86.4% | 59.9% | 100.0% | 81.8% | 100.0% | 88s |
+| **`hybrid`** | **100.0%** | **97.7%** | **78.0%** | **100.0%** | **95.5%** | **100.0%** | 87s |
+| `hybrid_rerank` | 95.5% | 93.2% | 76.9% | 100.0% | 86.4% | 100.0% | 199s |
+
+**What this shows**
+
+1. **The two retrieval arms fail on different questions, which is the whole
+   argument for blending them.** BM25 alone misses *"how much did operating margin
+   improve"* — a paraphrase with no keyword overlap. Semantic alone misses three
+   exact-figure lookups, where rare tokens carry the signal. Hybrid catches both
+   classes and is the only mode to reach 100% hit rate.
+
+2. **Answer correctness tracks retrieval quality almost exactly** (81.8% → 95.5%
+   as hit rate goes 86.4% → 100%). On this corpus the bottleneck is retrieval, not
+   generation — which is precisely why the two are measured separately.
+
+3. **The cross-encoder reranker did not earn its cost.** It scored at or below
+   plain hybrid while roughly doubling end-to-end time, and the same held at a
+   second chunk granularity (74 chunks, 400-char chunks). The production default
+   is therefore `hybrid`, not `hybrid_rerank`.
+
+   *Caveat, stated deliberately:* the whole gap at 33 chunks is a single question,
+   and 22 answerable questions is a small sample. Cross-encoders are expected to
+   pay off when refining a shortlist drawn from an index far larger than this one.
+   The honest reading is "unproven on this benchmark", not "rerankers don't work".
+   The mode is one config flag away for anyone who wants to re-measure at scale.
+
+4. **Faithfulness and refusal accuracy were 100% across every mode.** The system
+   did not invent content beyond its retrieved context, and declined all four
+   deliberately unanswerable questions. Note this measures the *guardrails*, not
+   difficulty — these questions have no plausible wrong answer in the corpus.
 <!-- EVAL_RESULTS_END -->
 
 **Metrics**
@@ -74,12 +110,19 @@ Upload (PDF / DOCX / TXT / CSV / XLSX)
 Both arms score the corpus, scores are min-max normalised onto a comparable scale, then
 blended as `α · semantic + (1 − α) · bm25`. Chunks are identified by a **content hash**,
 not object identity — vector stores return freshly constructed objects on every query, so
-identity-based lookups silently drop candidates from the other arm. Survivors above the
-score threshold go to a cross-encoder, which scores each `(query, chunk)` pair jointly
-rather than comparing pre-computed vectors.
+identity-based lookups silently drop candidates from the other arm.
 
 A floor on the candidate pool means an aggressive threshold degrades recall rather than
 returning nothing.
+
+Optional cross-encoder reranking (`hybrid_rerank`) scores each `(query, chunk)` pair
+jointly rather than comparing pre-computed vectors. It is **off by default** — see the
+measurements above for why.
+
+Chunks found by only one arm score 0 from the other, which biases mildly toward chunks
+both arms agree on. That suits grounded QA. Reciprocal Rank Fusion is the main
+alternative and sidesteps scale-mixing entirely, but discards the score magnitude the
+threshold filter depends on.
 
 ---
 
@@ -150,7 +193,7 @@ prefix, which is how the eval harness sweeps retrieval strategies without editin
 
 | Setting | Default | Notes |
 |---|---|---|
-| `DOCCHAT_RETRIEVAL_MODE` | `hybrid_rerank` | `bm25` · `semantic` · `hybrid` · `hybrid_rerank` |
+| `DOCCHAT_RETRIEVAL_MODE` | `hybrid` | `bm25` · `semantic` · `hybrid` · `hybrid_rerank` |
 | `DOCCHAT_RETRIEVAL_K` | `4` | Chunks sent to the LLM |
 | `DOCCHAT_HYBRID_ALPHA` | `0.5` | 0 = pure keyword, 1 = pure semantic |
 | `DOCCHAT_CHUNK_SIZE` | `600` | Fixed-chunking size |

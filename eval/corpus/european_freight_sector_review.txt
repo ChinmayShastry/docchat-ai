@@ -1,0 +1,123 @@
+EUROPEAN FREIGHT AND LOGISTICS SECTOR REVIEW
+Independent Market Study — 2025 Edition
+
+NOTE: Synthetic distractor document for retrieval evaluation. This is not a
+real publication. It shares vocabulary and subject matter with the two company
+reports in this corpus without answering any evaluation question, so that
+retrieval must distinguish specific figures from general sector commentary.
+
+
+1. SECTOR OVERVIEW
+
+The European freight and logistics market was valued at approximately 1.31
+trillion euros in 2025, growing 4.2% year on year in nominal terms and roughly
+1.1% after adjusting for inflation. Growth has decelerated from the
+post-pandemic peak of 2022, when nominal growth exceeded 11%.
+
+Road freight remains dominant, accounting for 73% of tonne-kilometres moved
+within the European Union. Rail accounts for 17%, inland waterways 6%, and
+other modes the remainder. The modal share of rail has been broadly static for
+a decade despite policy intent to shift freight off roads.
+
+Fragmentation remains the defining structural feature. The ten largest
+operators account for under 20% of total market revenue, and the long tail
+includes an estimated 550,000 firms operating fewer than ten vehicles.
+
+
+2. MARGIN STRUCTURE
+
+Operating margins across the sector typically fall between 3% and 9%.
+Specialised segments earn more: temperature-controlled and pharmaceutical
+logistics regularly exceed 10%, while general road haulage frequently operates
+below 4%.
+
+The margin differential reflects barriers to entry rather than pricing power.
+Temperature-controlled freight requires validated equipment, continuous
+monitoring, and regulatory qualification that a general haulier cannot acquire
+quickly. Air charter operations similarly benefit from limited capacity and
+the time-critical nature of the freight.
+
+Contract logistics and warehousing occupy a middle position, with margins
+sensitive to utilisation. Industry practice treats sustained utilisation below
+85% as a sign of structural overcapacity rather than cyclical softness.
+
+
+3. LABOUR
+
+Driver shortage is the sector's most frequently cited operational constraint.
+Industry bodies estimated a shortfall of approximately 425,000 drivers across
+Europe in 2025. The average age of a European heavy goods vehicle driver is
+47, and fewer than 6% are under 25.
+
+Driver attrition rates between 15% and 30% are common. Operators reporting
+attrition below 15% are typically those that have completed a structural pay
+review rather than those competing on non-monetary benefits alone.
+
+Pay restructuring has become the standard response, though its cost is
+material: a 10% increase in driver base pay typically consumes between 2% and
+4% of a road-focused operator's revenue.
+
+
+4. DECARBONISATION
+
+Electrification of light commercial fleets has progressed considerably faster
+than heavy vehicles. Sector-wide, electric vehicles represented roughly 9% of
+light commercial fleets in 2025, against under 2% of heavy tractor units.
+
+The disparity is infrastructural rather than technological. Long-haul corridors
+lack charging capacity at the power levels heavy vehicles require, and the
+investment required is generally beyond what individual operators will commit
+to unilaterally. Several large operators have consequently declined to publish
+heavy fleet electrification targets, while others have published targets
+contingent on public infrastructure investment.
+
+Hydrogen remains under evaluation. No major European operator has committed to
+hydrogen at scale, and most published roadmaps treat it as a post-2035
+consideration.
+
+
+5. REGULATION
+
+Proposed revisions to European Union driver hours rules are the most
+significant pending regulatory change. Draft proposals would reduce maximum
+permitted driving periods and extend mandatory rest.
+
+Sector analysts estimate the aggregate impact at between 0.4% and 0.9% of
+operating profit across affected operators, though the effect varies widely
+with network design. Operators with dense short-haul networks are less exposed
+than those dependent on long-haul corridors.
+
+The legislation has not been finalised, and its scope has changed materially
+between drafts. Operators have generally declined to quantify the impact
+precisely, citing that uncertainty.
+
+
+6. CONSOLIDATION
+
+Merger and acquisition activity totalled approximately 18.4 billion euros
+across 214 disclosed transactions in 2025, down from 23.1 billion euros in
+2024. The decline reflects financing costs rather than reduced strategic
+interest.
+
+Integration performance is poor by the sector's own accounting. Studies of
+disclosed transactions suggest the median integration runs 40% longer than the
+acquirer's original public estimate, with system consolidation the most common
+source of delay. Legacy data quality is repeatedly identified as the specific
+failure point, particularly where acquired entities operated separate
+transport management systems.
+
+Leverage discipline has tightened. Net debt to EBITDA above 3.5 times is now
+commonly treated by lenders as a constraint on further acquisition, where 4.0
+times was tolerated in prior cycles.
+
+
+7. OUTLOOK
+
+Sector forecasts for 2026 cluster around 3% to 5% nominal revenue growth, with
+margin recovery dependent on whether capacity discipline holds. Consensus
+expects continued divergence: specialised segments growing faster and earning
+more than general haulage.
+
+Analysts caution that sector-level averages conceal wide dispersion. Individual
+operator performance in this market has historically correlated more strongly
+with segment mix and network design than with sector conditions.
