@@ -28,15 +28,19 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
 
-      # The unit suite is fully mocked — no OpenAI calls, no model downloads —
-      # so CI installs only what the tested modules import. This keeps the run
-      # near a minute instead of pulling torch on every push.
+      # The suite makes no OpenAI calls and downloads no models, so CI installs
+      # only what the tested modules import rather than pulling torch on every
+      # push. langchain-chroma and chromadb *are* included: the indexer tests
+      # drive a real in-memory Chroma, and skipping them here would defeat the
+      # point — a Chroma version bump breaking the indexer is precisely the
+      # failure that reached production once.
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pytest pytest-cov ruff
           pip install langchain-core langchain-text-splitters rank-bm25 \
-                      numpy pandas openpyxl python-docx
+                      numpy pandas openpyxl python-docx \
+                      langchain-chroma langchain-openai chromadb
 
       - name: Lint
         run: ruff check .

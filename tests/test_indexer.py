@@ -12,10 +12,13 @@ import hashlib
 import pytest
 from langchain_core.documents import Document
 
-from src import indexer
-from src.indexer import NoUsableTextError, _index_fingerprint, build_index
-
+# Must precede the src.indexer import: that module imports both of these at
+# load time, so a guard placed after it would never run.
 pytest.importorskip("langchain_chroma")
+pytest.importorskip("langchain_openai")
+
+from src import indexer  # noqa: E402
+from src.indexer import NoUsableTextError, _index_fingerprint, build_index  # noqa: E402
 
 EMBED_DIM = 16
 
