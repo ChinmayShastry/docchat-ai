@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      # The unit suite is fully mocked — no OpenAI calls, no model downloads —
+      # so CI installs only what the tested modules import. This keeps the run
+      # near a minute instead of pulling torch on every push.
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov ruff
+          pip install langchain-core langchain-text-splitters rank-bm25 \
+                      numpy pandas openpyxl python-docx
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Run tests
+        run: pytest --cov=src --cov-report=term-missing
+
+  # Verifies the pinned runtime set actually resolves together. Separated from
+  # the test job because a full install is slow and its failure mode (a bad
+  # pin) is unrelated to whether the code is correct.
+  dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Resolve pinned dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --dry-run -r requirements.txt
