@@ -128,6 +128,10 @@ threshold filter depends on.
 
 ## Quick start
 
+**Requires Python 3.11 or 3.12.** The pinned dependency set does not install on 3.13 —
+a transitive numpy constraint has no 3.13 wheels and falls back to a source build that
+fails. Both supported versions are exercised in CI.
+
 ```bash
 git clone https://github.com/ChinmayShastry/docchat-ai.git
 cd docchat-ai
