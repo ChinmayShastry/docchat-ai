@@ -128,15 +128,26 @@ threshold filter depends on.
 
 ## Quick start
 
-**Requires Python 3.11 or 3.12.** The pinned dependency set does not install on 3.13 —
-a transitive numpy constraint has no 3.13 wheels and falls back to a source build that
-fails. Both supported versions are exercised in CI.
+**Requires Python 3.11, 3.12 or 3.13.** All three are installed and import-checked in CI.
 
 ```bash
 git clone https://github.com/ChinmayShastry/docchat-ai.git
 cd docchat-ai
 pip install -r requirements.txt
 ```
+
+The runtime install deliberately excludes `sentence-transformers` (and torch, ~800 MB).
+Reranking is off by default and imported lazily, so the default path never needs it — and
+on a memory-limited host it would be the largest thing installed for a feature the
+measurements show does not help. To enable it:
+
+```bash
+pip install -r requirements.txt -r requirements-rerank.txt
+DOCCHAT_RETRIEVAL_MODE=hybrid_rerank streamlit run app.py
+```
+
+Without it, requesting `hybrid_rerank` degrades to the blended ordering and logs a
+warning rather than failing.
 
 Provide an OpenAI API key either in `.env` (copy from `.env.example`) or by typing it into
 the app sidebar — the sidebar takes precedence.
@@ -152,8 +163,9 @@ docker build -t docchat-ai .
 docker run -p 8501:8501 -e OPENAI_API_KEY=sk-... docchat-ai
 ```
 
-The reranker weights are baked into the image so the first request doesn't wait on a
-model download.
+The image excludes the reranker for the same reason as above; the Dockerfile documents
+the two lines to add if you want it, including prefetching the weights at build time so a
+cold container's first request doesn't wait on a model download.
 
 ---
 
@@ -183,10 +195,14 @@ pytest
 ruff check .
 ```
 
-68 tests, fully mocked — no API calls, no model downloads, so CI runs free on every push.
+77 tests, offline — no API calls and no model downloads, so CI runs free on every push.
 Coverage focuses on the logic most likely to break silently: score blending and candidate
 filtering, the PDF parser fallback chain, chunking fallbacks, per-format extraction,
 history normalisation, and the groundedness verdict parser.
+
+The indexer tests run against a real in-memory Chroma with faked embeddings, rather than
+mocking the vector store. That is deliberate: the one dependency-upgrade bug that reached
+production was invisible to mocks, because mocks agree with whatever API you imagine.
 
 ---
 
@@ -242,7 +258,7 @@ docchat-ai/
 │   ├── summarizer.py         Direct and Map-Reduce summarisation
 │   ├── chat.py               Context assembly, streaming, groundedness check
 │   └── logging_setup.py      Central logging config
-├── tests/                    68 mocked unit tests
+├── tests/                    77 offline tests
 ├── eval/
 │   ├── corpus/               Synthetic evaluation document
 │   ├── dataset.json          26 questions with ground-truth spans

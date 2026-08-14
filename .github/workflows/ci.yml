@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12"]
+        python-version: ["3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
@@ -44,20 +44,41 @@ jobs:
       - name: Run tests
         run: pytest --cov=src --cov-report=term-missing
 
-  # Verifies the pinned runtime set actually resolves together. Separated from
-  # the test job because a full install is slow and its failure mode (a bad
-  # pin) is unrelated to whether the code is correct.
+  # Verifies the pinned runtime set actually resolves and installs. Separated
+  # from the test job because a bad pin fails for reasons unrelated to whether
+  # the code is correct.
+  #
+  # This job exists because it did not, once: langchain-chroma 0.2.0 capped
+  # numpy < 2.0.0, numpy 1.26.x has no cp313 wheels, and the resulting source
+  # build broke the deployed app on Python 3.13 while CI — then testing only
+  # 3.11 and 3.12 — stayed green. Every supported version is installed for real
+  # now, not dry-run, because the failure happened during the build step.
   dependencies:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
           cache: pip
 
-      - name: Resolve pinned dependencies
+      - name: Install pinned runtime dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install --dry-run -r requirements.txt
+          pip install -r requirements.txt
+
+      - name: Import the app's dependency surface
+        run: |
+          python -c "
+          import streamlit, openai, pandas, openpyxl, docx, pypdf, pymupdf, pdfplumber
+          from langchain_chroma import Chroma
+          from langchain_openai import OpenAIEmbeddings
+          from rank_bm25 import BM25Okapi
+          print('runtime imports OK')
+          "

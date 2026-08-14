@@ -1,23 +1,42 @@
-# Runtime dependencies.
-# Pinned to exact versions so a fresh install reproduces the environment these
+# Runtime dependencies for the Streamlit app.
+#
+# Pinned to exact versions so a fresh install reproduces the environment the
 # eval numbers were measured on. LangChain in particular has a history of
 # breaking changes across minor releases.
+#
+# Deliberately NOT here: sentence-transformers (and therefore torch, ~800 MB).
+# Reranking is off by default and its import is lazy, so the default retrieval
+# path never touches it. Installing it would dominate image size and memory on
+# a small host for a feature the measurements showed does not help. Install
+# requirements-rerank.txt to enable hybrid_rerank mode.
+#
+# langchain-community is no longer a *direct* dependency — its two uses here
+# (Chroma, PyPDFLoader) moved to langchain-chroma and pypdf. It is still pulled
+# in transitively by langchain-experimental, which provides SemanticChunker, so
+# the sunset package has not left the tree entirely. Dropping it completely
+# would mean giving up semantic chunking, which is part of the configuration
+# the eval numbers were measured on.
 
 streamlit==1.41.1
 openai==1.59.6
 
-# langchain-community is deliberately absent: it is being sunset upstream, and
-# its only uses here (Chroma, PyPDFLoader) are covered by langchain-chroma and
-# pypdf directly.
-langchain-core==0.3.29
+# Held on the 0.3.x line. LangChain 1.x is available, but moving the whole
+# stack across a major version would invalidate the environment the eval
+# numbers in eval/results/ were measured on. 0.3.86 is the minimum that
+# satisfies langchain-chroma 0.2.6's langchain-core >= 0.3.76.
+langchain-core==0.3.86
 langchain-openai==0.2.14
 langchain-experimental==0.3.4
 langchain-text-splitters==0.3.5
-langchain-chroma==0.2.0
 
-chromadb==0.5.23
+# langchain-chroma < 0.2.4 caps numpy < 2.0.0 on every Python version, and
+# numpy 1.26.x publishes no cp313 wheels — which makes the whole install fall
+# back to a source build that fails on Python 3.13. 0.2.4+ requires
+# numpy >= 2.1.0 there instead, and pulls chromadb 1.x.
+langchain-chroma==0.2.6
+chromadb==1.0.21
+
 rank-bm25==0.2.2
-sentence-transformers==3.3.1
 
 pypdf==5.1.0
 pymupdf==1.25.1

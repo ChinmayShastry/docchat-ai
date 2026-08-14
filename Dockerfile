@@ -1,15 +1,24 @@
 # Streamlit app image.
 #
-# The cross-encoder reranker is baked in at build time rather than downloaded
-# on first request — otherwise the first user of a cold container waits on a
-# ~90 MB model fetch before their first answer.
+# Reranking is off by default, and sentence-transformers is imported lazily, so
+# neither it nor torch is installed here — that keeps the image roughly 800 MB
+# smaller for a feature the measurements in eval/results/ showed does not help.
+#
+# To build an image with reranking available, add both lines below to the pip
+# install step and set DOCCHAT_RETRIEVAL_MODE=hybrid_rerank at runtime:
+#
+#     -r requirements-rerank.txt
+#     && python -c "from sentence_transformers import CrossEncoder; \
+#        CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')"
+#
+# Prefetching the weights at build time matters there, or the first request to
+# a cold container waits on a model download.
 
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    # Keep model + HF caches inside the app dir so they belong to the app user.
     HF_HOME=/app/.cache/huggingface
 
 WORKDIR /app
@@ -26,10 +35,6 @@ RUN pip install --upgrade pip && pip install -r requirements.txt \
     && apt-get purge -y build-essential && apt-get autoremove -y
 
 COPY . .
-
-# Pre-download the reranker weights into the image.
-RUN python -c "from sentence_transformers import CrossEncoder; \
-    CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')"
 
 # Run as a non-root user.
 RUN useradd --create-home --uid 1000 appuser \

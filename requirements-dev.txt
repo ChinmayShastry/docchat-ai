@@ -1,7 +1,12 @@
-# Development and CI dependencies.
-# Install with:  pip install -r requirements.txt -r requirements-dev.txt
+# Development, test and evaluation dependencies.
+#
+# Includes the reranker so the evaluation harness can actually exercise
+# hybrid_rerank rather than silently measuring a degraded fallback.
+#
+#   pip install -r requirements-dev.txt
 
 -r requirements.txt
+-r requirements-rerank.txt
 
 pytest==8.3.4
 pytest-cov==6.0.0

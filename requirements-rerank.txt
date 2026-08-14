@@ -1,0 +1,13 @@
+# Optional: cross-encoder reranking (DOCCHAT_RETRIEVAL_MODE=hybrid_rerank).
+#
+# Pulls torch, which is roughly 800 MB and dominates both image size and memory
+# on a small host. Kept separate because reranking is off by default: the
+# ablation in eval/results/ showed it scoring at or below plain hybrid while
+# roughly doubling latency.
+#
+# Without this installed, requesting hybrid_rerank degrades to the blended
+# ordering and logs a warning rather than failing — see HybridRetriever._rerank.
+#
+#   pip install -r requirements.txt -r requirements-rerank.txt
+
+sentence-transformers==3.3.1
